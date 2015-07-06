@@ -1,42 +1,30 @@
-<?php 
-		/*Llamadas de archivos necesarios 
-    por medio de require*/
+<?php
+/*Llamadas de archivos necesarios
+por medio de require*/
+require __DIR__ . '/../libs/db/db.php';
+/**
+ * Clase y su contenido
+ *
+ */
 
-     /**
-     * Clase y su contenido
-     *
-     */
+class Detalle {
+	private $cantidad;
+	private $sub_total;
+	private $db;
 
-	class Detalle implements Crud
-	{
-		private $cantidad;
-		private $sub_total;
+	function __construct($cant = null, $sub = null) {
+		$this->cantidad = $cant;
+		$this->sub_total = $sub;
 
-		function __construct($cant=null,$sub=null)
-		{
-			$this->cantidad=$cant;
-			$this->sub_total=$sub;
-		}
+		$this->db = new DB();
+	}
 
-		/*Implementacion de metodos Crud*/
-        public function crear();
-        public function read($nombre);
-        public function update($id);
-        public function delete($id); 
+	/*metodos Crud*/
+	public function insert() {}
+	public function read() {}
+	public function update($id) {}
+	public function delete($id) {}
+	public function existe($nombre) {}
 
-	
-    /**
-     * Getters 
-     */
-    public function getCantidad()
-    {
-        return $this->cantidad;
-    }
-
-    
-    public function getSub_total()
-    {
-        return $this->sub_total;
-    }
 }
- ?>
+?>

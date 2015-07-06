@@ -12,7 +12,7 @@ if(session_status() == PHP_SESSION_NONE){
 	session_start();
 }
 
-
+/*Variables usadas para la conexion a la BD.*/
 if(!defined('MYSQL_SERVER')){
 	define("MYSQL_SERVER","mysql:host=localhost");
 }

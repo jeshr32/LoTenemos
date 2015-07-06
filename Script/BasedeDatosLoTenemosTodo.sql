@@ -53,7 +53,7 @@ create table PERFIL
 (
    ID_PERFIL            bigint unsigned not null auto_increment,
    DESCRIPCION_PERFIL   varchar(250) not null,
-   primary key (ID_PERFIL, DESCRIPCION_PERFIL)
+   primary key (ID_PERFIL)
 );
 
 /*==============================================================*/
@@ -86,7 +86,6 @@ create table USUARIO
 (
    ID_USUARIO           bigint unsigned not null auto_increment,
    ID_PERFIL            bigint unsigned not null,
-   DESCRIPCION_PERFIL   varchar(250) not null,
    LOGIN_USUARIO        varchar(150) not null,
    PASS_USUARIO         varchar(64) not null,
    NOMBRE_USUARIO       varchar(50) not null,
@@ -109,6 +108,10 @@ alter table ORDEN_COMPRAS add constraint FK_CREA foreign key (ID_USUARIO)
 alter table PRODUCTOS add constraint FK_PERTENECE foreign key (ID_TIPO_PRODUCTO)
       references TIPO_PRODUCTO (ID_TIPO_PRODUCTO) on delete restrict on update restrict;
 
-alter table USUARIO add constraint FK_TIENE foreign key (ID_PERFIL, DESCRIPCION_PERFIL)
-      references PERFIL (ID_PERFIL, DESCRIPCION_PERFIL) on delete restrict on update restrict;
+alter table USUARIO add constraint FK_TIENE foreign key (ID_PERFIL)
+      references PERFIL (ID_PERFIL) on delete restrict on update restrict;
 
+
+INSERT INTO `lotenemostodo`.`perfil` (`ID_PERFIL`, `DESCRIPCION_PERFIL`) VALUES (NULL, 'Vendedor');
+INSERT INTO `lotenemostodo`.`perfil` (`ID_PERFIL`, `DESCRIPCION_PERFIL`) VALUES (NULL, 'Consulta');
+INSERT INTO `lotenemostodo`.`perfil` (`ID_PERFIL`, `DESCRIPCION_PERFIL`) VALUES (NULL, 'Administrador');
