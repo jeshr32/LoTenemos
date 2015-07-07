@@ -23,8 +23,9 @@ class Usuario implements Crud {
 	private $fechaNac;
 	private $db;
 
-	function __construct($log = null, $psw = null, $nom = null, $ape = null, $mail = null, $ed = null, $fen = null) {
+	function __construct($per = null, $log = null, $psw = null, $nom = null, $ape = null, $mail = null, $ed = null, $fen = null) {
 
+		$this->codigo_perfil = $per;
 		$this->login = $log;
 		$this->pass = md5($psw);
 		$this->nombre = $nom;
@@ -102,7 +103,7 @@ class Usuario implements Crud {
 	}
 	public function read() {
 		/*Definicion de query*/
-		$sql = "select * from usuario ORDER BY :id";
+		$sql = "select * from usuario ORDER BY ID_USUARIO";
 		/*Preparacion sql*/
 		try {
 			$query = $this->db->conexion->prepare($sql);
@@ -110,8 +111,6 @@ class Usuario implements Crud {
 			echo "Clase usuario:ERROR:Preparacion Query " . $Exception->getMessage() . '/' . $Exception->getCode();
 			return false;
 		}
-		/*Asignacion de parametros utilizando bindparam*/
-		$query->bindParam(':id', $this->id_usuario);
 
 		try {
 			$query->execute();
@@ -165,7 +164,7 @@ class Usuario implements Crud {
 		/*Preparación SQL*/
 		$querydel = $this->db->conexion->prepare($sqldel);
 
-		$querydel->bindParam(':id', $id_usuario);
+		$querydel->bindParam(':id', $id);
 
 		try {
 			$querydel->execute();
