@@ -195,5 +195,36 @@ class Usuario implements Crud {
 
 	}
 
+	/**
+	 * Getters.
+	 */
+	public function getId_usuario() {
+		return $this->id_usuario;
+	}
+
+	public function getCodigo_perfil() {
+		return $this->codigo_perfil;
+	}
+
+	public function getLogin() {
+		return $this->login;
+	}
+
+	public function getNombre() {
+		return $this->nombre;
+	}
+
+	public function getApellido() {
+		return $this->apellido;
+	}
+
+	public function getCorreo() {
+		return $this->correo;
+	}
+
+	public function getFechaNac() {
+		return $this->fechaNac;
+	}
+
 }
 ?>
