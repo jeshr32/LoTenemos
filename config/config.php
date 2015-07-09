@@ -19,6 +19,9 @@ if (!defined('ROOT_URL')) {
 if (!defined('ROOT_ADMIN')) {
 	define('ROOT_ADMIN', '/LoTenemos/admin/');
 }
+if (!defined('ADMIN_COLOR')) {
+	define('ADMIN_COLOR', 'skin-blue');
+}
 /*Variables usadas para la conexion a la BD.*/
 if (!defined('MYSQL_SERVER')) {
 	define("MYSQL_SERVER", "mysql:host=localhost");

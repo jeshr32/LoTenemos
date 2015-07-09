@@ -16,13 +16,13 @@ if (!empty($_POST['user']) && !empty($_POST['pass'])) {
 
 	if ($usuario->login()) {
 		$_SESSION['usuario'] = [
-			'id' => $usuario->getId_usuario,
-			'perfil' => $usuario->getCodigo_perfil,
-			'user' => $usuario->getLogin,
-			'nombre' => $usuario->getNombre,
-			'apellido' => $usuario->getApellido,
-			'email' => $usuario->getCorreo,
-			'fechaNacimiento' => $usuario->getFechaNac
+			'id' => $usuario->getId_usuario(),
+			'perfil' => $usuario->getCodigo_perfil(),
+			'user' => $usuario->getLogin(),
+			'nombre' => $usuario->getNombre(),
+			'apellido' => $usuario->getApellido(),
+			'email' => $usuario->getCorreo(),
+			'fechaNacimiento' => $usuario->getFechaNac(),
 		];
 		header('Location: ' . ROOT_URL . 'index.php');
 	} else {

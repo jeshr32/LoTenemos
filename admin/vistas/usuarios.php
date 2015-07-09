@@ -1,6 +1,8 @@
 <?php
 /*Llamadas de archivos necesarios
 por medio de require*/
+
+require __DIR__ . '/../../config/auth.php';
 require __DIR__ . '/../../config/config.php';
 require __DIR__ . '/../../clases/Usuario.php';
 

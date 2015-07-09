@@ -40,7 +40,8 @@ require __DIR__ . '/../config/config.php';
                     <div class="alert alert-danger alert-dismissable">
                         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
                         <h4><i class="icon fa fa-ban"></i> Error!</h4>
-                        <?=$_SESSION['error_tmp']?>
+                        <?=$_SESSION['error_tmp']?></br>
+                        ¿No tiene una cuenta? <a href="<?=ROOT_ADMIN?>vistas/registro.php">Registrese</a>
                         <?php unset($_SESSION['error_tmp']);?>
                     </div>
                 <?php }
@@ -60,6 +61,7 @@ require __DIR__ . '/../config/config.php';
               				<button type="submit" class="btn btn-primary btn-block btn-flat">Entrar</button>
             			</div>
           			</div>
+
         		</form>
       		</div>
     	</div>
