@@ -1,5 +1,6 @@
 <?php
 $titulo = (!empty($titulo)) ? $titulo : 'Admin';
+
 ?>
 <!DOCTYPE html>
 <html>

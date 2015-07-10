@@ -16,6 +16,15 @@
 	    <!-- bootstrap color picker -->
 	    <script src="<?=ROOT_URL?>assets/plugins/colorpicker/bootstrap-colorpicker.min.js" type="text/javascript"></script>
 
+		 <script>
+	    	$(document).ready(function() {
+	    		if( $('#dataTablesTable').length ){
+	    	    	$('#dataTablesTable').dataTable();
+	    		}
+	    	/*colorpicker*/
+	    	$(".my-colorpicker1").colorpicker();
+	    	} );
+	    </script>
 	    <!-- funcion para confirmar eliminar producto-->
 	    <script type="text/javascript">
 		function confirmation() {

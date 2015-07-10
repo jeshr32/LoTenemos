@@ -115,3 +115,4 @@ alter table USUARIO add constraint FK_TIENE foreign key (ID_PERFIL)
 INSERT INTO `lotenemostodo`.`perfil` (`ID_PERFIL`, `DESCRIPCION_PERFIL`) VALUES (NULL, 'Vendedor');
 INSERT INTO `lotenemostodo`.`perfil` (`ID_PERFIL`, `DESCRIPCION_PERFIL`) VALUES (NULL, 'Consulta');
 INSERT INTO `lotenemostodo`.`perfil` (`ID_PERFIL`, `DESCRIPCION_PERFIL`) VALUES (NULL, 'Administrador');
+INSERT INTO `lotenemostodo`.`usuario` (`ID_USUARIO`, `ID_PERFIL`, `LOGIN_USUARIO`, `PASS_USUARIO`, `NOMBRE_USUARIO`, `APELLIDO_USUARIO`, `CORREO_USUARIO`, `EDAD_USUARIO`, `FECHANACIMIENTO_USUARIO`) VALUES (NULL, '1', 'jeshxr32', '202cb962ac59075b964b07152d234b70', 'Jesús', 'Cabezas', 'cabezas.jesus@gmail.com', '23', '1992/03/30');

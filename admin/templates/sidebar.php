@@ -56,20 +56,61 @@ $listaProducto = $modeloProducto->obtenerTodos();*/
 			</li>
 			<li class="header">SITIO</li>
 
-
 			<li class="treeview">
 				<a href="#">
-				  	<i class="fa fa-coffee"></i> <span>Mantenedores</span> <small class="label pull-right bg-green">6</small>
+					<i class="fa fa-coffee"></i> <span>Mantenedores</span>
+					<i class="fa fa-angle-left pull-right"></i>
 				</a>
-				<ul class="treeview-menu ">
-                    <li>
-                      <a href="#"><i class="fa fa-circle-o"></i> Usuarios<i class="fa fa-angle-left pull-right"></i></a>
-                      	<ul class="treeview-menu">
-                       	 	<li><a href="#"><i class="fa fa-plus-circle"></i> Agregar Nuevo</a></li>
-                       		<li><a href="#"><i class="fa fa-list-ul"></i> Ver Todos</a></li>
-                      </ul>
-                    </li>
-                 </ul>
+				<ul class="treeview-menu menu-open" >
+
+					<li class="">
+						<a href="#"><i class="fa fa-circle-o text-aqua"></i> Usuarios <i class="fa fa-angle-left pull-right"></i></a>
+						<ul class="treeview-menu menu-open" >
+							<li><a href="#"><i class="fa fa-plus-circle"></i> Agregar Nuevo</a></li>
+							<li><a href="<?=ROOT_ADMIN?>vistas/ListarUsuarios.php"><i class="fa fa-list-ul"></i> Ver Todos</a></li>
+						</ul>
+					</li>
+						<li class="">
+						<a href="#"><i class="fa fa-circle-o text-yellow"></i> Perfiles <i class="fa fa-angle-left pull-right"></i></a>
+						<ul class="treeview-menu menu-open" >
+							<li><a href="#"><i class="fa fa-plus-circle"></i> Agregar Nuevo</a></li>
+							<li><a href="#"><i class="fa fa-list-ul"></i> Ver Todos</a></li>
+						</ul>
+					</li>
+					</li>
+						<li class="">
+						<a href="#"><i class="fa fa-circle-o text-purple"></i> Productos <i class="fa fa-angle-left pull-right"></i></a>
+						<ul class="treeview-menu menu-open" >
+							<li><a href="#"><i class="fa fa-plus-circle"></i> Agregar Nuevo</a></li>
+							<li><a href="#"><i class="fa fa-list-ul"></i> Ver Todos</a></li>
+						</ul>
+					</li>
+					</li>
+						<li class="">
+						<a href="#"><i class="fa fa-circle-o text-red"></i> Tipos productos <i class="fa fa-angle-left pull-right"></i></a>
+						<ul class="treeview-menu menu-open" >
+							<li><a href="#"><i class="fa fa-plus-circle"></i> Agregar Nuevo</a></li>
+							<li><a href="#"><i class="fa fa-list-ul"></i> Ver Todos</a></li>
+						</ul>
+					</li>
+					</li>
+						<li class="">
+						<a href="#"><i class="fa fa-circle-o text-green"></i> Ordenes de compra <i class="fa fa-angle-left pull-right"></i></a>
+						<ul class="treeview-menu menu-open" >
+							<li><a href="#"><i class="fa fa-plus-circle"></i> Agregar Nuevo</a></li>
+							<li><a href="#"><i class="fa fa-list-ul"></i> Ver Todos</a></li>
+						</ul>
+					</li>
+					</li>
+						<li class="">
+						<a href="#"><i class="fa fa-circle-o text-black"></i> Detalle OC <i class="fa fa-angle-left pull-right"></i></a>
+						<ul class="treeview-menu menu-open" >
+							<li><a href="#"><i class="fa fa-plus-circle"></i> Agregar Nuevo</a></li>
+							<li><a href="#"><i class="fa fa-list-ul"></i> Ver Todos</a></li>
+						</ul>
+					</li>
+
+				</ul>
 			</li>
 
 			<li>
@@ -86,10 +127,6 @@ $listaProducto = $modeloProducto->obtenerTodos();*/
 
 			<!-- Accessos Rapidos -->
 			<li class="header">ATAJOS</li>
-			<li><a href="<?=ROOT_ADMIN?>contactos.php?filter=Comprar"><i class="fa fa-circle-o text-green"></i> <span>Futuro Cliente</span></a></li>
-			<li><a href="<?=ROOT_ADMIN?>contactos.php?filter=Reclamos"><i class="fa fa-circle-o text-red"></i> <span>Reclamos</span></a></li>
-			<li><a href="<?=ROOT_ADMIN?>contactos.php?filter=Sugerencias"><i class="fa fa-circle-o text-yellow"></i> <span>Sugerencias</span></a></li>
-			<li><a href="<?=ROOT_ADMIN?>contactos.php?filter=ContactoEmpresarial"><i class="fa fa-circle-o text-aqua"></i> <span>Consultas Empresa</span></a></li>
 			<li><a href="<?=ROOT_ADMIN?>perfil.php"><i class="fa fa-user"></i> <span>Mi Perfil</span></a></li>
 			<li><a href="<?=ROOT_ADMIN?>logout.php"><i class="fa fa-sign-out"></i> <span>Cerrar Sesión</span></a></li>
 			</ul>

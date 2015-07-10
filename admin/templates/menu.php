@@ -20,7 +20,7 @@
           			<li class="dropdown user user-menu">
             			<a href="#" class="dropdown-toggle" data-toggle="dropdown">
               				<!-- <img src="<?=ROOT_URL?>assets/dist/img/user2-160x160.jpg" class="user-image" alt="User Image"/> -->
-                      <span class="hidden-m"><?=$_SESSION['usuario']['nombre']?></span>
+                      <span class="hidden-m"><?=utf8_encode($_SESSION['usuario']['nombre'])?> <?=utf8_encode($_SESSION['usuario']['apellido'])?></span>
             			</a>
             			<ul class="dropdown-menu">
               				<!-- User image -->
@@ -28,7 +28,9 @@
                 				<!-- <img src="<?=ROOT_URL?>assets/dist/img/user2-160x160.jpg" class="img-circle" /> -->
                 				<p>
                   					<?=$_SESSION['usuario']['user']?>
-                  					<small>Miembre desde <?=$_SESSION['usuario']['nombre']?></small>
+                  					<small>Usuario   : <?=$_SESSION['usuario']['user']?></small>
+                            <small>Mail      : <?=$_SESSION['usuario']['email']?></small>
+                            <small>Fecha Nac : <?=$_SESSION['usuario']['fechaNacimiento']?></small>
                 				</p>
               				</li>
               				<!-- Menu Footer-->

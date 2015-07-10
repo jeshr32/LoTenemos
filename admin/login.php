@@ -41,7 +41,7 @@ require __DIR__ . '/../config/config.php';
                         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
                         <h4><i class="icon fa fa-ban"></i> Error!</h4>
                         <?=$_SESSION['error_tmp']?></br>
-                        ¿No tiene una cuenta? <a href="<?=ROOT_ADMIN?>vistas/registro.php">Registrese</a>
+                        ¿No tiene una cuenta? <a href="<?=ROOT_ADMIN?>vistas/register.php">Registrese</a>
                         <?php unset($_SESSION['error_tmp']);?>
                     </div>
                 <?php }
