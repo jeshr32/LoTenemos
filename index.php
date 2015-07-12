@@ -67,16 +67,7 @@ $listaProducto = $modeloProducto->obtenerTodos();*/
 			</div>
 
 			<!-- fix for small devices only -->
-			<div class="clearfix visible-sm-block"></div>
-				<div class="col-md-4 col-sm-6 col-xs-12">
-			  	<div class="info-box">
-			    	<span class="info-box-icon bg-yellow"><i class="fa fa-crosshairs"></i></span>
-			    	<div class="info-box-content">
-			      		<span class="info-box-text">Perfiles</span>
-			      		<span class="info-box-number">6</span>
-			    	</div>
-			  	</div>
-			</div>
+
 				<div class="col-md-4 col-sm-6 col-xs-12">
 			  	<div class="info-box">
 			    	<span class="info-box-icon bg-green"><i class="fa fa-cart-arrow-down"></i></span>

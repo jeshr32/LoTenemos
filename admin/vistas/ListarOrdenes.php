@@ -2,18 +2,17 @@
 /*Llamadas de archivos necesarios
 por medio de require*/
 
-$titulo = "Listado de Usuarios";
+$titulo = "Listado de Ordenes de Compra";
 
 require __DIR__ . '/../../config/auth.php';
 require __DIR__ . '/../../config/config.php';
 require __DIR__ . '/../templates/header.php';
 require __DIR__ . '/../templates/menu.php';
 require __DIR__ . '/../templates/sidebar.php';
-require __DIR__ . '/../../clases/Usuario.php';
-require __DIR__ . '/../../clases/Perfil.php';
+require __DIR__ . '/../../clases/Productos.php';
 
-$modeloUsers = new Usuario();
-$listaUsers = $modeloUsers->read();
+$modeloProd = new Productos();
+$listaProd = $modeloProd->read();
 
 /*
 |--------------------------------------------------------------------------
@@ -46,18 +45,7 @@ $listaUsers = $modeloUsers->read();
             </div>
     <?php }
 ?>
-	<!-- Resultado positivo eliminar-->
-	<?php if (array_key_exists('success_contact', $_SESSION)) {
-	?>
-            <div class="alert alert-info" role="alert">
-                <strong>Hey!</strong>
-                <br>
-                Se elimino correctamente el Producto <?=$_SESSION['producto']?>!
-                <?php unset($_SESSION['success_contact']);
-	unset($_SESSION['producto']);?>
-            </div>
-    <?php }
-?>
+
     <!-- resultado negativo segun corresponda -->
 	<?php if (array_key_exists('error_tmp', $_SESSION)) {?>
                 <div class="alert alert-danger" role="alert">
@@ -86,51 +74,34 @@ $listaUsers = $modeloUsers->read();
 		  			        <thead>
 		  			            <tr>
 		  			            	<th>#</th>
-		  			                <th>Perfil</th>
-		  			                <th>Login</th>
-		  			                <th>Nombre</th>
-		  			                <th>Apellido</th>
-		  			                <th>Correo</th>
-		  			                <th>Edad</th>
-		  			                <th>Nacimiento</th>
+		  			                <th>Descripción</th>
+		  			                <th>Precio</th>
+		  			                <th>Unidad</th>
+		  			                <th>Tipo</th>
 		  			                <th>Acciones</th>
 		  			            </tr>
 		  			        </thead>
 		  			        <tfoot>
 		  			            <tr>
 		  			            	<th>#</th>
-		  			                <th>Perfil</th>
-		  			                <th>Login</th>
-		  			                <th>Nombre</th>
-		  			                <th>Apellido</th>
-		  			                <th>Correo</th>
-		  			                <th>Edad</th>
-		  			                <th>Nacimiento</th>
+		  			                <th>Descripción</th>
+		  			                <th>Precio</th>
+		  			                <th>Unidad</th>
+		  			                <th>Tipo</th>
 		  			                <th>Acciones</th>
 		  			            </tr>
 		  			        </tfoot>
 		  			        <tbody>
-							<?php foreach ($listaUsers as $row) {
+							<?php foreach ($listaProd as $row) {
 	?>
 							<tr>
-								<td><?=$row['ID_USUARIO']?></td>
-								<td><?=$row['DESCRIPCION_PERFIL']?></td>
-								<td><?=$row['LOGIN_USUARIO']?></td>
-								<td><?=utf8_encode($row['NOMBRE_USUARIO'])?></td>
-								<td><?=utf8_encode($row['APELLIDO_USUARIO'])?></td>
-								<td><?=utf8_encode($row['CORREO_USUARIO'])?></td>
-								<td><?=$row['EDAD_USUARIO']?></td>
-								<td><?=$row['FECHANACIMIENTO_USUARIO']?></td>
+								<td><?=$row['ID_PRODUCTO']?></td>
+								<td><?=$row['DESCRIPCION']?></td>
+								<td><?=$row['PRECIO']?></td>
+								<td><?=$row['UNIDAD']?></td>
+								<td><?=$row['DESCRIPCION_TIPO']?></td>
 								<td>
-									<div class="form-group">
-										<div class="col-md-2 col-sm-4 col-xs-8" >
-											<a href=""
-													class="btn btn-danger"
-											  		onClick="return confirmation()">
-											 		<span class="glyphicon glyphicon-trash"></span>
-											</a>
-										</div>
-									</div>
+
 									<div class="form-group">
 										<div class="col-md-2 col-sm-4 col-xs-8">
 											<a href="" class="btn btn-info"><span class="glyphicon glyphicon-refresh"></span></a>

@@ -57,7 +57,7 @@ class Productos implements Crud {
 	}
 	public function read() {
 		/*Definicion de query*/
-		$sql = "select * from productos ORDER BY ID_PRODUCTO";
+		$sql = "select * from productos p INNER JOIN tipo_producto t ON p.ID_TIPO_PRODUCTO=t.ID_TIPO_PRODUCTO";
 		/*Preparacion sql*/
 		try {
 			$query = $this->db->conexion->prepare($sql);

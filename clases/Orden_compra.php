@@ -57,7 +57,7 @@ class Orden implements Crud {
 	}
 	public function read() {
 		/*Definicion de query*/
-		$sql = "select * from orden_compras ORDER BY ID_OC";
+		$sql = "select * from orden_compras o INNER JOIN usuario u ON o.ID_USUARIO=u.ID_USUARIO";
 		/*Preparacion sql*/
 		try {
 			$query = $this->db->conexion->prepare($sql);

@@ -27,7 +27,7 @@ if (!isset($_GET['perfil'])) {
 			$_SESSION['nameusuario'] = $nombre;
 
 		} else {
-			$_SESSION['error_tmp'] = "Producto no ingresado";
+			$_SESSION['error_tmp'] = "Usuario no ingresado";
 		}
 
 	} else {
@@ -57,7 +57,7 @@ if (!isset($_GET['perfil'])) {
 			$_SESSION['usuario'] = $nombre;
 
 		} else {
-			$_SESSION['error_tmp'] = "Producto no ingresado";
+			$_SESSION['error_tmp'] = "Usuario no ingresado";
 		}
 
 	} else {
