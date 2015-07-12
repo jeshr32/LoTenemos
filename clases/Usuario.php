@@ -4,7 +4,7 @@
 por medio de require*/
 
 require __DIR__ . '/../libs/db/db.php';
-require 'interfaceCRUD.php';
+require __DIR__ . '/interfaceCRUD.php';
 
 /**
  * Clase y su contenido
@@ -23,7 +23,7 @@ class Usuario implements Crud {
 	private $fechaNac;
 	private $db;
 
-	function __construct($per = null, $log = null, $psw = null, $nom = null, $ape = null, $mail = null, $ed = null, $fen = null) {
+	function __construct($per = null, $log = null, $psw = null, $nom = null, $ape = null, $mail = null, $fen = null) {
 
 		$this->codigo_perfil = $per;
 		$this->login = $log;
@@ -31,7 +31,7 @@ class Usuario implements Crud {
 		$this->nombre = $nom;
 		$this->apellido = $ape;
 		$this->correo = $mail;
-		$this->edad = $ed;
+		$this->edad = $this->calculaEdad($fen);
 		$this->fechaNac = $fen;
 
 		$this->db = new DB();
@@ -71,7 +71,7 @@ class Usuario implements Crud {
 		$sqlins = "insert into usuario values(null,:tip,:lgn,:psw,:nom,:ape,:ema,:ed,:fec)";
 		/*Verifica que el nombre de usuario no exista*/
 		if ($this->existe($this->login)) {
-			echo "El usuario $this->login ya existe.";
+			$_SESSION['error_tmp'] = "El usuario $this->login ya existe.";
 			return false;
 		}
 		/*Preparación SQL*/
@@ -103,7 +103,7 @@ class Usuario implements Crud {
 	}
 	public function read() {
 		/*Definicion de query*/
-		$sql = "select * from usuario ORDER BY ID_USUARIO";
+		$sql = "select * from usuario u INNER JOIN perfil p ON u.ID_PERFIL=p.ID_PERFIL";
 		/*Preparacion sql*/
 		try {
 			$query = $this->db->conexion->prepare($sql);
@@ -193,6 +193,31 @@ class Usuario implements Crud {
 			return false;
 		}
 
+	}
+	public function traeid() {
+		/*Definición del query que permitira traer un nuevo registro*/
+		$sqlsel = "select ID_PERFIL from perfil	where DESCRIPCION_PERFIL='Consulta'";
+
+		/*Preparación SQL*/
+		$querysel = $this->db->conexion->prepare($sqlsel);
+
+		$querysel->execute();
+
+		if ($querysel->rowcount() == 1) {
+			foreach ($querysel as $row) {
+				return $row['ID_PERFIL'];
+			}
+
+		} else {
+			return false;
+		}
+
+	}
+	public function calculaEdad($fechaNac) {
+		$datetime1 = new DateTime($fechaNac);
+		$datetime2 = new DateTime();
+		$interval = $datetime1->diff($datetime2);
+		return $interval->y;
 	}
 
 	/**

@@ -10,9 +10,12 @@ require __DIR__ . '/../templates/header.php';
 require __DIR__ . '/../templates/menu.php';
 require __DIR__ . '/../templates/sidebar.php';
 require __DIR__ . '/../../clases/Usuario.php';
+require __DIR__ . '/../../clases/Perfil.php';
 
 $modeloUsers = new Usuario();
 $listaUsers = $modeloUsers->read();
+$modeloPerfil = new Perfil();
+$listaPerfiles = $modeloPerfil->read();
 /*
 |--------------------------------------------------------------------------
 | Contenido del Sitio
@@ -42,7 +45,8 @@ $listaUsers = $modeloUsers->read();
                 <?php unset($_SESSION['success_update']);
 	?>
             </div>
-    <?php }?>
+    <?php }
+?>
 	<!-- Resultado positivo eliminar-->
 	<?php if (array_key_exists('success_contact', $_SESSION)) {
 	?>
@@ -53,7 +57,8 @@ $listaUsers = $modeloUsers->read();
                 <?php unset($_SESSION['success_contact']);
 	unset($_SESSION['producto']);?>
             </div>
-    <?php }?>
+    <?php }
+?>
     <!-- resultado negativo segun corresponda -->
 	<?php if (array_key_exists('error_tmp', $_SESSION)) {?>
                 <div class="alert alert-danger" role="alert">
@@ -62,7 +67,8 @@ $listaUsers = $modeloUsers->read();
                     <?=$_SESSION['error_tmp']?>
                     <?php unset($_SESSION['error_tmp']);?>
                 </div>
-    <?php }?>
+    <?php }
+?>
 	<!-- Contenido -->
 	<section class="content">
 
@@ -105,10 +111,11 @@ $listaUsers = $modeloUsers->read();
 		  			            </tr>
 		  			        </tfoot>
 		  			        <tbody>
-							<?php foreach ($listaUsers as $row) {?>
+							<?php foreach ($listaUsers as $row) {
+	?>
 							<tr>
 								<td><?=$row['ID_USUARIO']?></td>
-								<td><?=$row['ID_PERFIL']?></td>
+								<td><?=$row['DESCRIPCION_PERFIL']?></td>
 								<td><?=$row['LOGIN_USUARIO']?></td>
 								<td><?=utf8_encode($row['NOMBRE_USUARIO'])?></td>
 								<td><?=utf8_encode($row['APELLIDO_USUARIO'])?></td>
@@ -134,7 +141,8 @@ $listaUsers = $modeloUsers->read();
 
 								</td>
 							</tr>
-		  			        <?php }?>
+		  			        <?php }
+?>
 		  			        </tbody>
 		  			    </table>
 

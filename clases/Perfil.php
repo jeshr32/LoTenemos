@@ -2,7 +2,7 @@
 /*Llamadas de archivos necesarios
 por medio de require*/
 require __DIR__ . '/../libs/db/db.php';
-require 'interfaceCRUD.php';
+require_once __DIR__ . '/interfaceCRUD.php';
 /**
  * Clase y su contenido
  *
@@ -51,7 +51,7 @@ class Perfil implements Crud {
 	}
 	public function read() {
 		/*Definicion de query*/
-		$sql = "select * from perfil ORDER BY ID_PERFIL";
+		$sql = "select * from perfil ";
 		/*Preparacion sql*/
 		try {
 			$query = $this->db->conexion->prepare($sql);

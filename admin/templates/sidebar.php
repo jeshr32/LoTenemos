@@ -8,10 +8,6 @@
 | cada pagina, mas declaraion de variables para el header, menu, sidebar.
 |
  */
-/*require __DIR__.'/../../clases/Producto.php';
-
-$modeloProducto = new Producto();
-$listaProducto = $modeloProducto->obtenerTodos();*/
 
 /*
 |--------------------------------------------------------------------------
@@ -66,7 +62,7 @@ $listaProducto = $modeloProducto->obtenerTodos();*/
 					<li class="">
 						<a href="#"><i class="fa fa-circle-o text-aqua"></i> Usuarios <i class="fa fa-angle-left pull-right"></i></a>
 						<ul class="treeview-menu menu-open" >
-							<li><a href="#"><i class="fa fa-plus-circle"></i> Agregar Nuevo</a></li>
+							<li><a href="<?=ROOT_ADMIN?>vistas/agregarUsuario.php"><i class="fa fa-plus-circle"></i> Agregar Nuevo</a></li>
 							<li><a href="<?=ROOT_ADMIN?>vistas/ListarUsuarios.php"><i class="fa fa-list-ul"></i> Ver Todos</a></li>
 						</ul>
 					</li>

@@ -35,16 +35,29 @@ require __DIR__ . '/../config/config.php';
       		</div>
       		<div class="login-box-body">
         		<p class="login-box-msg">Para acceder inicia sesión</p>
-
-                <?php if (array_key_exists('error_tmp', $_SESSION)) {?>
-                    <div class="alert alert-danger alert-dismissable">
-                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-                        <h4><i class="icon fa fa-ban"></i> Error!</h4>
-                        <?=$_SESSION['error_tmp']?></br>
-                        ¿No tiene una cuenta? <a href="<?=ROOT_ADMIN?>vistas/register.php">Registrese</a>
-                        <?php unset($_SESSION['error_tmp']);?>
-                    </div>
-                <?php }
+            <!--Resultado positivo-->
+            <?php if (array_key_exists('usuario', $_SESSION)) {
+	?>
+              <div class="alert alert-info" role="alert">
+                <strong>Hey!</strong>
+                <br>
+                Señor <?=$_SESSION['usuario']?> ya esta registrado!<br>
+                Use su usuario y contraseña para acceder
+                <?php unset($_SESSION['usuario']);
+	?>
+              </div>
+              <?php }
+?>
+            <!--Algun error-->
+            <?php if (array_key_exists('error_tmp', $_SESSION)) {?>
+            <div class="alert alert-danger alert-dismissable">
+              <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+              <h4><i class="icon fa fa-ban"></i> Error!</h4>
+              <?=$_SESSION['error_tmp']?></br>
+              ¿No tiene una cuenta? <a href="<?=ROOT_ADMIN?>vistas/register.php">Registrese</a>
+              <?php unset($_SESSION['error_tmp']);?>
+            </div>
+            <?php }
 ?>
 
         		<form action="<?=ROOT_ADMIN?>controladores/dologin.php" method="post">

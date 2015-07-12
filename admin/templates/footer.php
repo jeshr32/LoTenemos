@@ -35,5 +35,33 @@
     		return false;
 		}
 		</script>
+		<!-- funcion para buscar el username-->
+		<script type="text/javascript">
+		$(document).ready(function() {
+			$('#login').blur(function(){
+
+				var username = $(this).val();
+				var dataString = 'username='+username;
+				$.ajax({
+					type: "POST",
+					url: "../controladores/check_username_availablity.php",
+					data: dataString,
+					success: function(data) {
+						$("#ok").html(data);
+						$('#lgn').removeClass("has-feedback").addClass("has-warning"),
+						$('#btnrg').attr("disabled","true");
+
+						if(!data){
+              			//Todo vuelve a su lugar
+              			$('#lgn').removeClass("has-warning").addClass("has-feedback"),
+              			$('#btnrg').removeAttr("disabled");
+          				}
+      				}
+
+  		});
+			});
+
+		});
+			</script>
   </body>
 </html>
