@@ -4,7 +4,7 @@
 por medio de require*/
 
 require __DIR__ . '/../libs/db/db.php';
-require __DIR__ . '/interfaceCRUD.php';
+require_once __DIR__ . '/interfaceCRUD.php';
 
 /**
  * Clase y su contenido
@@ -124,7 +124,7 @@ class Usuario implements Crud {
 
 	public function update($id) {
 		/*Definicion del query que permitira actualizar */
-		$sqlupd = "update usuario set ID_PERFIL=:tip,LOGIN_USUARIO=:lgn,PASS_USUARIO=:psw,NOMBRE_USUARIO=:nom
+		$sqlupd = "update usuario set ID_PERFIL=:tip,LOGIN_USUARIO=:lgn,NOMBRE_USUARIO=:nom
 		,APELLIDO_USUARIO=:ape,CORREO_USUARIO=:ema,EDAD_USUARIO=:ed,FECHANACIMIENTO_USUARIO=:fec where ID_USUARIO=:id";
 
 		/*Preparación SQL*/
@@ -137,9 +137,8 @@ class Usuario implements Crud {
 
 		/*Asignacion de parametros utilizando bindparam*/
 		$queryup->bindParam(':id', $id);
-		$queryup->bindParam(':tip', $this->$codigo_perfil);
-		$queryup->bindParam(':lgn', $this->$login);
-		$queryup->bindParam(':psw', $this->$pass);
+		$queryup->bindParam(':tip', $this->codigo_perfil);
+		$queryup->bindParam(':lgn', $this->login);
 		$queryup->bindParam(':nom', $this->nombre);
 		$queryup->bindParam(':ape', $this->apellido);
 		$queryup->bindParam(':ema', $this->correo);

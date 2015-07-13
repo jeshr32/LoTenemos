@@ -34,13 +34,13 @@ $listaProd = $modeloProd->read();
 		</ol>
 	</section>
 	<!-- Resultado positivo modificar-->
-	<?php if (array_key_exists('success_update', $_SESSION)) {
+	<?php if (array_key_exists('produp', $_SESSION)) {
 	?>
             <div class="alert alert-info" role="alert">
                 <strong>Hey!</strong>
                 <br>
                 Se modifico correctamente el Producto !
-                <?php unset($_SESSION['success_update']);
+                <?php unset($_SESSION['produp']);
 	?>
             </div>
     <?php }
@@ -104,7 +104,8 @@ $listaProd = $modeloProd->read();
 
 									<div class="form-group">
 										<div class="col-md-2 col-sm-4 col-xs-8">
-											<a href="" class="btn btn-info"><span class="glyphicon glyphicon-refresh"></span></a>
+											<a href="<?=ROOT_ADMIN?>vistas/modificarProducto.php?id=<?=$row['ID_PRODUCTO']?>&des=<?=$row['DESCRIPCION']?>&pre=<?=$row['PRECIO']?>
+												&uni=<?=$row['UNIDAD']?>&tip=<?=$row['ID_TIPO_PRODUCTO']?>" class="btn btn-info"><span class="glyphicon glyphicon-refresh"></span></a>
 
 										</div>
 									</div>

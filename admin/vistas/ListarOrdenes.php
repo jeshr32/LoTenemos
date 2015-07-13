@@ -9,10 +9,11 @@ require __DIR__ . '/../../config/config.php';
 require __DIR__ . '/../templates/header.php';
 require __DIR__ . '/../templates/menu.php';
 require __DIR__ . '/../templates/sidebar.php';
-require __DIR__ . '/../../clases/Productos.php';
+require __DIR__ . '/../../clases/Orden_compra.php';
 
-$modeloProd = new Productos();
-$listaProd = $modeloProd->read();
+
+$modeloOrden = new Orden();
+$listaOrden = $modeloOrden->read();
 
 /*
 |--------------------------------------------------------------------------
@@ -27,10 +28,10 @@ $listaProd = $modeloProd->read();
 <div class="content-wrapper">
 	<!-- Header de la pagina -->
 	<section class="content-header">
-		<h1>Usuarios</h1>
+		<h1>Ordenes de Compra</h1>
 		<ol class="breadcrumb">
 		<li><a href="<?=ROOT_URL?>index.php"><i class="fa fa-dashboard"></i> Dashboard</a></li>
-		<li class="active"><i class="fa fa-shopping-cart"></i> Usuarios</li>
+		<li class="active"><i class="fa fa-shopping-cart"></i> Ordenes de Compra</li>
 		</ol>
 	</section>
 	<!-- Resultado positivo modificar-->
@@ -64,47 +65,53 @@ $listaProd = $modeloProd->read();
 			<div class="col-md-offset-1 col-md-10">
 				<div class="box box-solid">
 					<div class="box-header with-border">
-			  			<h3 class="box-title">Lista de usuarios</h3>
+			  			<h3 class="box-title">Ordenes de Compra</h3>
 			  			<div class="box-tools pull-right">
 			    			<button class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="Minimizar"><i class="fa fa-minus"></i></button>
 			  			</div>
 					</div>
-					<div class="box-body">
+					<div class="box-body treeview-menu menu-open">
 			  			<table id="dataTablesTable" class="table table-striped table-bordered" width="100%">
 		  			        <thead>
 		  			            <tr>
 		  			            	<th>#</th>
-		  			                <th>Descripción</th>
-		  			                <th>Precio</th>
-		  			                <th>Unidad</th>
-		  			                <th>Tipo</th>
+		  			                <th>Usuario</th>
+		  			                <th>Fecha Emisión</th>
+		  			                <th>Total OC</th>
+		  			                <th>Estado</th>
 		  			                <th>Acciones</th>
 		  			            </tr>
 		  			        </thead>
 		  			        <tfoot>
 		  			            <tr>
 		  			            	<th>#</th>
-		  			                <th>Descripción</th>
-		  			                <th>Precio</th>
-		  			                <th>Unidad</th>
-		  			                <th>Tipo</th>
+		  			                <th>Usuario</th>
+		  			                <th>Fecha Emisión</th>
+		  			                <th>Total OC</th>
+		  			                <th>Estado</th>
 		  			                <th>Acciones</th>
 		  			            </tr>
 		  			        </tfoot>
 		  			        <tbody>
-							<?php foreach ($listaProd as $row) {
+							<?php foreach ($listaOrden as $row) {
 	?>
 							<tr>
-								<td><?=$row['ID_PRODUCTO']?></td>
-								<td><?=$row['DESCRIPCION']?></td>
-								<td><?=$row['PRECIO']?></td>
-								<td><?=$row['UNIDAD']?></td>
-								<td><?=$row['DESCRIPCION_TIPO']?></td>
+								<td><?=$row['ID_OC']?></td>
+								<td><?=$row['NOMBRE_USUARIO']?> <?=$row['APELLIDO_USUARIO']?></td>
+								<td><?=$row['FECHA_EMISION']?></td>
+								<td><?=$row['TOTAL_OC']?></td>
+								<td><?=$row['ESTADO']?></td>
 								<td>
 
 									<div class="form-group">
 										<div class="col-md-2 col-sm-4 col-xs-8">
-											<a href="" class="btn btn-info"><span class="glyphicon glyphicon-refresh"></span></a>
+											<a href="" class="btn btn-sm btn-info"><span class="glyphicon glyphicon-refresh"></span></a>
+
+										</div>
+									</div>
+									<div class="form-group">
+										<div class="col-md-2 col-sm-4 col-xs-8">
+											<a href="<?=ROOT_ADMIN?>vistas/ListarDetalle.php?id=<?=$row['ID_OC']?>" class="btn btn-sm btn-primary">Detalle  <span class="glyphicon glyphicon-th-list"></span></a>
 
 										</div>
 									</div>

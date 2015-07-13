@@ -9,7 +9,6 @@ require __DIR__ . '/../../config/config.php';
 require __DIR__ . '/../templates/header.php';
 require __DIR__ . '/../templates/menu.php';
 require __DIR__ . '/../templates/sidebar.php';
-require __DIR__ . '/../../clases/Tipo_productos.php';
 
 /*
 |--------------------------------------------------------------------------
@@ -25,7 +24,7 @@ require __DIR__ . '/../../clases/Tipo_productos.php';
  <div class="content-wrapper">
 	<!-- Header de la pagina -->
 	<section class="content-header">
-		<h1>Tipo de productos</h1>
+		<h1>Agregar Tipo de productos</h1>
 		<ol class="breadcrumb">
 			<li><a href="<?=ROOT_ADMIN?>index.php"><i class="fa fa-dashboard"></i> Dashboard</a></li>
 			<li class="active"><i class="fa fa-shopping-cart"></i> Tipo de productos</li>

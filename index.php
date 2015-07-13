@@ -16,9 +16,26 @@ require __DIR__ . '/admin/templates/header.php';
 require __DIR__ . '/admin/templates/menu.php';
 require __DIR__ . '/admin/templates/sidebar.php';
 require __DIR__ . '/clases/Usuario.php';
+require __DIR__ . '/clases/Tipo_productos.php';
+require __DIR__ . '/clases/Productos.php';
+require __DIR__ . '/clases/Orden_compra.php';
+require __DIR__ . '/clases/Detalle_oc.php';
 
+/*Usuario*/
 $modeloUsers = new Usuario();
 $listaUsers = $modeloUsers->read();
+/*Tipo Producto*/
+$modeloTipo = new Tipo();
+$listaTipo = $modeloTipo->read();
+/*Producto*/
+$modeloProd = new Productos();
+$listaprod = $modeloProd->read();
+/*Orden de compra*/
+$modeloOC = new Orden();
+$listaOC = $modeloOC->read();
+/*detalle*/
+$modeloDet = new Detalle();
+$listaDet = $modeloDet->read();
 
 /*$modeloProducto = new Producto();
 $listaProducto = $modeloProducto->obtenerTodos();*/
@@ -73,7 +90,7 @@ $listaProducto = $modeloProducto->obtenerTodos();*/
 			    	<span class="info-box-icon bg-green"><i class="fa fa-cart-arrow-down"></i></span>
 			    	<div class="info-box-content">
 			      		<span class="info-box-text">Ordenes de compra</span>
-			      		<span class="info-box-number">6</span>
+			      		<span class="info-box-number"><?=$listaOC->rowcount()?></span>
 			    	</div>
 			  	</div>
 			</div>
@@ -82,7 +99,7 @@ $listaProducto = $modeloProducto->obtenerTodos();*/
 			    	<span class="info-box-icon bg-purple"><i class="fa fa-shopping-cart"></i></span>
 			    	<div class="info-box-content">
 			      		<span class="info-box-text">Productos</span>
-			      		<span class="info-box-number">6</span>
+			      		<span class="info-box-number"><?=$listaprod->rowcount()?></span>
 			    	</div>
 			  	</div>
 			</div>
@@ -91,7 +108,7 @@ $listaProducto = $modeloProducto->obtenerTodos();*/
 			    	<span class="info-box-icon bg-red"><i class="fa fa-eyedropper"></i></span>
 			    	<div class="info-box-content">
 			      		<span class="info-box-text">Tipos Productos</span>
-			      		<span class="info-box-number">6</span>
+			      		<span class="info-box-number"><?=$listaTipo->rowcount()?></span>
 			    	</div>
 			  	</div>
 			</div>
@@ -100,7 +117,7 @@ $listaProducto = $modeloProducto->obtenerTodos();*/
 			    	<span class="info-box-icon bg-black"><i class="fa fa-tasks"></i></span>
 			    	<div class="info-box-content">
 			      		<span class="info-box-text">Detalle OC</span>
-			      		<span class="info-box-number">6</span>
+			      		<span class="info-box-number"><?=$listaDet->rowcount()?></span>
 			    	</div>
 			  	</div>
 			</div>

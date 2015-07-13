@@ -4,7 +4,7 @@
 /*Llamadas de archivos necesarios
 por medio de require*/
 require __DIR__ . '/../libs/db/db.php';
-require 'interfaceCRUD.php';
+require_once __DIR__ . '/interfaceCRUD.php';
 /**
  * Clase y su contenido
  *

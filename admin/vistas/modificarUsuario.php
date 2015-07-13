@@ -1,8 +1,14 @@
 <?php
-/*Llamadas de archivos necesarios
-por medio de require*/
-
-$titulo = "Agregar usuario";
+/*
+|--------------------------------------------------------------------------
+| Archivos y configuracion de Pagina
+|--------------------------------------------------------------------------
+|
+| Aqui se hace "required" de archivos minimos de funcionamiento para armar
+| cada pagina, mas declaraion de variables para el header, menu, sidebar.
+|
+ */
+$titulo = "Modificar Usuario";
 
 require __DIR__ . '/../../config/auth.php';
 require __DIR__ . '/../../config/config.php';
@@ -12,8 +18,19 @@ require __DIR__ . '/../templates/sidebar.php';
 require __DIR__ . '/../../clases/Usuario.php';
 require __DIR__ . '/../../clases/Perfil.php';
 
+
 $modeloPerfil = new Perfil();
 $listaPerfiles = $modeloPerfil->read();
+
+$ida = (isset($_GET['id']) && $_GET['id'] != "") ? $_GET['id'] : null;
+$per = (isset($_GET['per']) && $_GET['per'] != "") ? $_GET['per'] : null;
+$log = (isset($_GET['log']) && $_GET['log'] != "") ? $_GET['log'] : null;
+$nom = (isset($_GET['nom']) && $_GET['nom'] != "") ? $_GET['nom'] : null;
+$ape = (isset($_GET['ape']) && $_GET['ape'] != "") ? $_GET['ape'] : null;
+$ema = (isset($_GET['ema']) && $_GET['ema'] != "") ? $_GET['ema'] : null;
+$nac = (isset($_GET['nac']) && $_GET['nac'] != "") ? $_GET['nac'] : null;
+
+
 /*
 |--------------------------------------------------------------------------
 | Contenido del Sitio
@@ -23,6 +40,7 @@ $listaPerfiles = $modeloPerfil->read();
 | haber solo HTML cn algunos tags para PHP para acceder a variables.
 |
  */
+
 ?>
 
  <div class="content-wrapper">
@@ -31,7 +49,7 @@ $listaPerfiles = $modeloPerfil->read();
 		<h1>Usuarios</h1>
 		<ol class="breadcrumb">
 			<li><a href="<?=ROOT_ADMIN?>index.php"><i class="fa fa-dashboard"></i> Dashboard</a></li>
-			<li class="active"><i class="fa fa-shopping-cart"></i> Usuarios</li>
+			<li class="active"><i class="fa fa-shopping-cart"></i> Modificar Usuarios</li>
 		</ol>
 	</section>
 	<!-- Contenido -->
@@ -41,18 +59,7 @@ $listaPerfiles = $modeloPerfil->read();
 
 		  	<!-- resultado postivo-->
 		  	<div id="ok"></div>
-		  	<?php if (array_key_exists('nameusuario', $_SESSION)) {
-	?>
-		  		<div class="col-md-12">
-			        <div class="alert alert-info" role="alert">
-			            <strong>Hey!</strong>
-			            <br>
-			            Se agrego correctamente el usuario <?=$_SESSION['nameusuario']?>!
-			            <?php unset($_SESSION['nameusuario']);?>
-			        </div>
-			    </div>
-		    <?php }
-?>
+		  	
 			<!-- resultado negativo segun corresponda -->
 			<?php if (array_key_exists('error_tmp', $_SESSION)) {?>
 			    <div class="col-md-12">
@@ -69,49 +76,43 @@ $listaPerfiles = $modeloPerfil->read();
 			<div class="col-md-offset-2 col-md-8">
 				<div class="box box-solid">
 					<div class="box-header with-border">
-						<h3 class="box-title">Nuevo Usuario</h3>
+						<h3 class="box-title">Modificar Usuario</h3>
 						<div class="box-tools pull-right">
 							<button class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="Minimizar"><i class="fa fa-minus"></i></button>
 						</div>
 					</div>
 					<div class="box-body">
 
-						<form class="form-horizontal" method="post" action="<?=ROOT_ADMIN?>controladores/insert-user.php" enctype="multipart/form-data">
+						<form class="form-horizontal" method="post" action="<?=ROOT_ADMIN?>controladores/update-Usuario.php?id=<?=$ida?>" enctype="multipart/form-data">
 							<fieldset>
 								<div class="form-group">
 									<label for="nombre" class="col-lg-2 control-label">Nombres </label>
 									<div class="col-lg-10">
-										<input type="text" class="form-control" placeholder="Nombres" required patern="[A-Za-z]{50}" id="nombre" name="nombre"/>
+										<input type="text" class="form-control" placeholder="Nombres" required patern="[A-Za-z]{50}" id="nombre" name="nombre" value=<?=$nom?> >
 									</div>
 								</div>
 								<div class="form-group">
 									<label for="apellido" class="col-lg-2 control-label">Apellidos </label>
 									<div class="col-lg-10">
-										<input type="text" class="form-control" placeholder="Apellidos" required patern="[A-Za-z]{50}" id="apellido" name="apellido"/>
+										<input type="text" class="form-control" placeholder="Apellidos" required patern="[A-Za-z]{50}" id="apellido" name="apellido" value=<?=$ape?> >
 									</div>
 								</div>
 								<div class="form-group">
 									<label for="mail" class="col-lg-2 control-label">Correo </label>
 									<div class="col-lg-10">
-										<input type="email" class="form-control" placeholder="Email" required maxleng="150" id="mail" name="mail"/>
+										<input type="email" class="form-control" placeholder="Email" required maxleng="150" id="mail" name="mail" value=<?=$ema?>>
 									</div>
 								</div>
 								<div class="form-group">
 									<label for="login" class="col-lg-2 control-label">Login </label>
 									<div class="col-lg-10">
-										<input type="text" class="form-control" placeholder="Login" name="login" id="login" maxleng="50" required/>
-									</div>
-								</div>
-								<div class="form-group">
-									<label for="pass" class="col-lg-2 control-label">Password </label>
-									<div class="col-lg-10">
-										<input type="password" class="form-control" placeholder="Password" required id="pass" name="pass"/>
+										<input type="text" class="form-control" placeholder="Login" name="logini" id="logini" maxleng="50" required value=<?=$log?>>
 									</div>
 								</div>
 								<div class="form-group">
 									<label for="inputEmail" class="col-lg-2 control-label">Fecha Nacimiento</label>
 									<div class="col-lg-10">
-										<input id="nac" name="nac" type="date" onClick="fechaHoy()" min="1900-01-01" class="form-control" placeholder="Fecha Nacimiento" required/>
+										<input id="nac" name="nac" type="date" onClick="fechaHoy()" min="1900-01-01" class="form-control" placeholder="Fecha Nacimiento" required value=<?=$nac?>>
 									</div>
 								</div>
 
@@ -121,10 +122,16 @@ $listaPerfiles = $modeloPerfil->read();
 								<label for="perfil" class="col-lg-2 control-label">Perfil </label>
 									<div class="col-lg-10">
 										<select class="form-control" id="perfil" name="perfil">
-										<?php foreach ($listaPerfiles as $row) {?>
+										<?php foreach ($listaPerfiles as $row) {
+											$aux;
+											$aux = $row['ID_PERFIL'];
+											if ($aux == $per) {?>
+											<option selected value="<?=$row['ID_PERFIL']?>"><?=$row['DESCRIPCION_PERFIL']?> </option>
+											<?php } else {?>
 											<option value="<?=$row['ID_PERFIL']?>"><?=$row['DESCRIPCION_PERFIL']?> </option>
-										<?php }
+											<?php }}
 ?>
+
 										</select>
 										<br>
 									</div>

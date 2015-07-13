@@ -7,10 +7,12 @@
 | Este archivo se encarga de guardar un nuevo usuario en el sistema.
 |
  */
+
 require __DIR__ . '/../../config/config.php';
 require __DIR__ . '/../../clases/Usuario.php';
 
 if (!isset($_GET['perfil'])) {
+	require __DIR__ . '/../../config/auth.php';
 	if (!empty($_POST['nombre']) && !empty($_POST['apellido']) && !empty($_POST['mail']) && !empty($_POST['login']) && !empty($_POST['pass']) && !empty($_POST['nac']) && !empty($_POST['perfil'])) {
 		$tipo = $_POST['perfil'];
 		$nombre = $_POST['nombre'];
@@ -21,7 +23,6 @@ if (!isset($_GET['perfil'])) {
 		$nac = $_POST['nac'];
 
 		$usuario = new Usuario($tipo, $login, $pass, $nombre, $apellido, $mail, $nac);
-		var_dump($usuario);
 
 		if ($usuario->insert()) {
 			$_SESSION['nameusuario'] = $nombre;
@@ -50,7 +51,6 @@ if (!isset($_GET['perfil'])) {
 
 		/*En este caso el usuario se generara con el perfil por defecto */
 		$usuario = new Usuario($tipo, $login, $pass, $nombre, $apellido, $mail, $nac);
-		var_dump($usuario);
 
 		if ($usuario->insert()) {
 			$_SESSION['success_contact'] = true;

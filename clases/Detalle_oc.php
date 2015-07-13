@@ -51,9 +51,9 @@ class Detalle {
 		}
 		return true;
 	}
-	public function read($id_oc) {
+	public function read($id_oc = null) {
 		/*Definicion de query*/
-		$sql = "select * from detalle_oc where id_oc=:id";
+		$sql = "select * from detalle_oc d INNER JOIN productos p ON d.ID_PRODUCTO = p.ID_PRODUCTO where id_oc=:id";
 		/*Preparacion sql*/
 		try {
 			$query = $this->db->conexion->prepare($sql);

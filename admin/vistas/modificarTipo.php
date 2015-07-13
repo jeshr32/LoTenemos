@@ -1,8 +1,14 @@
 <?php
-/*Llamadas de archivos necesarios
-por medio de require*/
-
-$titulo = "Agregar producto";
+/*
+|--------------------------------------------------------------------------
+| Archivos y configuracion de Pagina
+|--------------------------------------------------------------------------
+|
+| Aqui se hace "required" de archivos minimos de funcionamiento para armar
+| cada pagina, mas declaraion de variables para el header, menu, sidebar.
+|
+ */
+$titulo = "Modificar Tipo Producto";
 
 require __DIR__ . '/../../config/auth.php';
 require __DIR__ . '/../../config/config.php';
@@ -10,10 +16,9 @@ require __DIR__ . '/../templates/header.php';
 require __DIR__ . '/../templates/menu.php';
 require __DIR__ . '/../templates/sidebar.php';
 
-require __DIR__ . '/../../clases/Tipo_productos.php';
+$idtipo = (isset($_GET['id']) && $_GET['id'] != "") ? $_GET['id'] : null;
+$nombr = (isset($_GET['nom']) && $_GET['nom'] != "") ? $_GET['nom'] : null;
 
-$modeloTipo = new Tipo();
-$listaTipo = $modeloTipo->read();
 /*
 |--------------------------------------------------------------------------
 | Contenido del Sitio
@@ -23,15 +28,15 @@ $listaTipo = $modeloTipo->read();
 | haber solo HTML cn algunos tags para PHP para acceder a variables.
 |
  */
-?>
 
- <div class="content-wrapper">
+?>
+<div class="content-wrapper">
 	<!-- Header de la pagina -->
 	<section class="content-header">
-		<h1>Productos</h1>
+		<h1>Modificar Tipo de productos</h1>
 		<ol class="breadcrumb">
 			<li><a href="<?=ROOT_ADMIN?>index.php"><i class="fa fa-dashboard"></i> Dashboard</a></li>
-			<li class="active"><i class="fa fa-shopping-cart"></i> Productos</li>
+			<li class="active"><i class="fa fa-shopping-cart"></i> Modificar Tipo de productos</li>
 		</ol>
 	</section>
 	<!-- Contenido -->
@@ -39,20 +44,9 @@ $listaTipo = $modeloTipo->read();
 		<!-- Otros Contenidos -->
 		<div class="row">
 
-		  	<!-- resultado postivo-->
+
 		  	<div id="ok"></div>
-		  	<?php if (array_key_exists('prod', $_SESSION)) {
-	?>
-		  		<div class="col-md-12">
-			        <div class="alert alert-info" role="alert">
-			            <strong>Hey!</strong>
-			            <br>
-			            Se agrego correctamente el producto <?=$_SESSION['prod']?>!
-			            <?php unset($_SESSION['prod']);?>
-			        </div>
-			    </div>
-		    <?php }
-?>
+
 			<!-- resultado negativo segun corresponda -->
 			<?php if (array_key_exists('error_tmp', $_SESSION)) {?>
 			    <div class="col-md-12">
@@ -69,46 +63,21 @@ $listaTipo = $modeloTipo->read();
 			<div class="col-md-offset-2 col-md-8">
 				<div class="box box-solid">
 					<div class="box-header with-border">
-						<h3 class="box-title">Nuevo Producto</h3>
+						<h3 class="box-title">Modificar Tipo</h3>
 						<div class="box-tools pull-right">
 							<button class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="Minimizar"><i class="fa fa-minus"></i></button>
 						</div>
 					</div>
 					<div class="box-body">
 
-						<form class="form-horizontal" method="post" action="<?=ROOT_ADMIN?>controladores/insert-Producto.php" enctype="multipart/form-data">
+						<form class="form-horizontal" method="post" action="<?=ROOT_ADMIN?>controladores/update-tipo.php?id=<?=$idtipo?>" enctype="multipart/form-data">
 							<fieldset>
 								<div class="form-group">
-									<label for="nombre" class="col-lg-2 control-label">Nombre Producto </label>
+									<label for="nombre" class="col-lg-2 control-label">Descripcion Tipo </label>
 									<div class="col-lg-10">
-										<input type="text" class="form-control" placeholder="Nombre producto" required patern="[A-Za-z]{150}" id="nombre" name="nombre"/>
+										<input type="text" class="form-control" placeholder="Descripcion" required patern="[A-Za-z]{50}" id="nombre" name="nombre" value=<?=$nombr?>>
 									</div>
 								</div>
-								<div class="form-group">
-									<label for="precio" class="col-lg-2 control-label">Precio </label>
-									<div class="col-lg-10">
-										<input class="form-control" id="precio" placeholder="Precio" type="number" name="precio" required="true" min="1" >
-									</div>
-								</div>
-								<div class="form-group">
-									<label for="unidad" class="col-lg-2 control-label">Unidades </label>
-									<div class="col-lg-10">
-										<input class="form-control" id="unidad" placeholder="Precio" type="number" name="unidad" required="true" min="1" >
-									</div>
-								</div>
-
-								<div class="form-group">
-								<label for="tipo" class="col-lg-2 control-label">Tipo </label>
-									<div class="col-lg-10">
-										<select class="form-control" id="tipo" name="tipo">
-										<?php foreach ($listaTipo as $row) {?>
-											<option value="<?=$row['ID_TIPO_PRODUCTO']?>"><?=$row['DESCRIPCION_TIPO']?> </option>
-										<?php }
-?>
-										</select>
-										<br>
-									</div>
-									</div>
 
 
 								<div class="form-group">

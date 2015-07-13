@@ -27,23 +27,25 @@ $listaTipo = $modeloTipo->read();
 <div class="content-wrapper">
 	<!-- Header de la pagina -->
 	<section class="content-header">
-		<h1>Tipos de Productos</h1>
+		<h1>Listado Tipos de Productos</h1>
 		<ol class="breadcrumb">
 		<li><a href="<?=ROOT_URL?>index.php"><i class="fa fa-dashboard"></i> Dashboard</a></li>
-		<li class="active"><i class="fa fa-shopping-cart"></i> Usuarios</li>
+		<li class="active"><i class="fa fa-shopping-cart"></i> Tipos de Productos</li>
 		</ol>
 	</section>
 	<!-- Resultado positivo modificar-->
-	<?php if (array_key_exists('success_update', $_SESSION)) {
+	
+	<?php if (array_key_exists('tipup', $_SESSION)) {
 	?>
-            <div class="alert alert-info" role="alert">
-                <strong>Hey!</strong>
-                <br>
-                Se modifico correctamente el Producto !
-                <?php unset($_SESSION['success_update']);
-	?>
-            </div>
-    <?php }
+		  		<div class="col-md-12">
+			        <div class="alert alert-info" role="alert">
+			            <strong>Hey!</strong>
+			            <br>
+			            Se Modifico correctamente el tipo a <?=$_SESSION['tipup']?>!
+			            <?php unset($_SESSION['tipup']);?>
+			        </div>
+			    </div>
+		    <?php }
 ?>
 
     <!-- resultado negativo segun corresponda -->
@@ -95,7 +97,7 @@ $listaTipo = $modeloTipo->read();
 
 									<div class="form-group">
 										<div class="col-md-2 col-sm-4 col-xs-8">
-											<a href="" class="btn btn-info"><span class="glyphicon glyphicon-refresh"></span></a>
+											<a href="<?=ROOT_ADMIN?>vistas/modificarTipo.php?id=<?=$row['ID_TIPO_PRODUCTO']?>&nom=<?=$row['DESCRIPCION_TIPO']?>" class="btn btn-info"><span class="glyphicon glyphicon-refresh"></span></a>
 
 										</div>
 									</div>

@@ -70,7 +70,7 @@
 						<li class="">
 						<a href="#"><i class="fa fa-circle-o text-purple"></i> Productos <i class="fa fa-angle-left pull-right"></i></a>
 						<ul class="treeview-menu menu-open" >
-							<li><a href="#"><i class="fa fa-plus-circle"></i> Agregar Nuevo</a></li>
+							<li><a href="<?=ROOT_ADMIN?>vistas/agregarProducto.php"><i class="fa fa-plus-circle"></i> Agregar Nuevo</a></li>
 							<li><a href="<?=ROOT_ADMIN?>vistas/ListarProductos.php"><i class="fa fa-list-ul"></i> Ver Todos</a></li>
 						</ul>
 					</li>
@@ -87,7 +87,7 @@
 						<a href="#"><i class="fa fa-circle-o text-green"></i> Ordenes de compra <i class="fa fa-angle-left pull-right"></i></a>
 						<ul class="treeview-menu menu-open" >
 							<li><a href="#"><i class="fa fa-plus-circle"></i> Agregar Nuevo</a></li>
-							<li><a href="#"><i class="fa fa-list-ul"></i> Ver Todos</a></li>
+							<li><a href="<?=ROOT_ADMIN?>vistas/ListarOrdenes.php"><i class="fa fa-list-ul"></i> Ver Todos</a></li>
 						</ul>
 					</li>
 					</li>

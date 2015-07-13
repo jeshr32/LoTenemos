@@ -2,18 +2,19 @@
 /*Llamadas de archivos necesarios
 por medio de require*/
 
-$titulo = "Listado de Usuarios";
+$titulo = "Detalle de Compra";
 
 require __DIR__ . '/../../config/auth.php';
 require __DIR__ . '/../../config/config.php';
 require __DIR__ . '/../templates/header.php';
 require __DIR__ . '/../templates/menu.php';
 require __DIR__ . '/../templates/sidebar.php';
-require __DIR__ . '/../../clases/Usuario.php';
-require __DIR__ . '/../../clases/Perfil.php';
+require __DIR__ . '/../../clases/Detalle_oc.php';
 
-$modeloUsers = new Usuario();
-$listaUsers = $modeloUsers->read();
+$idoc = (isset($_GET['id']) && $_GET['id'] != "") ? $_GET['id'] : null;
+
+$modeloDetalle = new Detalle();
+$listaDetalle = $modeloDetalle->read($idoc);
 
 /*
 |--------------------------------------------------------------------------
@@ -28,36 +29,25 @@ $listaUsers = $modeloUsers->read();
 <div class="content-wrapper">
 	<!-- Header de la pagina -->
 	<section class="content-header">
-		<h1>Usuarios</h1>
+		<h1>Ordenes de Compra</h1>
 		<ol class="breadcrumb">
 		<li><a href="<?=ROOT_URL?>index.php"><i class="fa fa-dashboard"></i> Dashboard</a></li>
-		<li class="active"><i class="fa fa-shopping-cart"></i> Usuarios</li>
+		<li class="active"><i class="fa fa-shopping-cart"></i> Detalle de la Orden</li>
 		</ol>
 	</section>
 	<!-- Resultado positivo modificar-->
-	<?php if (array_key_exists('usrup', $_SESSION)) {
+	<?php if (array_key_exists('success_update', $_SESSION)) {
 	?>
             <div class="alert alert-info" role="alert">
                 <strong>Hey!</strong>
                 <br>
-                Se modifico correctamente el Usuario !
-                <?php unset($_SESSION['usrup']);
+                Se modifico correctamente el Producto !
+                <?php unset($_SESSION['success_update']);
 	?>
             </div>
     <?php }
 ?>
-	<!-- Resultado positivo eliminar-->
-	<?php if (array_key_exists('success_contact', $_SESSION)) {
-	?>
-            <div class="alert alert-info" role="alert">
-                <strong>Hey!</strong>
-                <br>
-                Se elimino correctamente el Producto <?=$_SESSION['producto']?>!
-                <?php unset($_SESSION['success_contact']);
-	unset($_SESSION['producto']);?>
-            </div>
-    <?php }
-?>
+
     <!-- resultado negativo segun corresponda -->
 	<?php if (array_key_exists('error_tmp', $_SESSION)) {?>
                 <div class="alert alert-danger" role="alert">
@@ -76,7 +66,7 @@ $listaUsers = $modeloUsers->read();
 			<div class="col-md-offset-1 col-md-10">
 				<div class="box box-solid">
 					<div class="box-header with-border">
-			  			<h3 class="box-title">Lista de usuarios</h3>
+			  			<h3 class="box-title">Detalle de la orden N <?=$idoc?></h3>
 			  			<div class="box-tools pull-right">
 			    			<button class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="Minimizar"><i class="fa fa-minus"></i></button>
 			  			</div>
@@ -85,42 +75,27 @@ $listaUsers = $modeloUsers->read();
 			  			<table id="dataTablesTable" class="table table-striped table-bordered" width="100%">
 		  			        <thead>
 		  			            <tr>
-		  			            	<th>#</th>
-		  			                <th>Perfil</th>
-		  			                <th>Login</th>
-		  			                <th>Nombre</th>
-		  			                <th>Apellido</th>
-		  			                <th>Correo</th>
-		  			                <th>Edad</th>
-		  			                <th>Nacimiento</th>
+		  			            	<th>Nombre de Producto</th>
+		  			                <th>Cantidad</th>
+		  			                <th>Sub total</th>
 		  			                <th>Acciones</th>
 		  			            </tr>
 		  			        </thead>
 		  			        <tfoot>
 		  			            <tr>
-		  			            	<th>#</th>
-		  			                <th>Perfil</th>
-		  			                <th>Login</th>
-		  			                <th>Nombre</th>
-		  			                <th>Apellido</th>
-		  			                <th>Correo</th>
-		  			                <th>Edad</th>
-		  			                <th>Nacimiento</th>
+		  			            	<th>Nombre de Producto</th>
+		  			                <th>Cantidad</th>
+		  			                <th>Sub total</th>
 		  			                <th>Acciones</th>
 		  			            </tr>
 		  			        </tfoot>
 		  			        <tbody>
-							<?php foreach ($listaUsers as $row) {
+							<?php foreach ($listaDetalle as $row) {
 	?>
 							<tr>
-								<td><?=$row['ID_USUARIO']?></td>
-								<td><?=$row['DESCRIPCION_PERFIL']?></td>
-								<td><?=$row['LOGIN_USUARIO']?></td>
-								<td><?=utf8_encode($row['NOMBRE_USUARIO'])?></td>
-								<td><?=utf8_encode($row['APELLIDO_USUARIO'])?></td>
-								<td><?=utf8_encode($row['CORREO_USUARIO'])?></td>
-								<td><?=$row['EDAD_USUARIO']?></td>
-								<td><?=$row['FECHANACIMIENTO_USUARIO']?></td>
+								<td><?=$row['DESCRIPCION']?></td>
+								<td><?=$row['CANTIDAD']?></td>
+								<td><?=$row['SUB_TOTAL']?></td>
 								<td>
 									<div class="form-group">
 										<div class="col-md-2 col-sm-4 col-xs-8" >
@@ -133,10 +108,8 @@ $listaUsers = $modeloUsers->read();
 									</div>
 									<div class="form-group">
 										<div class="col-md-2 col-sm-4 col-xs-8">
-											<a href="<?=ROOT_ADMIN?>vistas/modificarUsuario.php?id=<?=$row['ID_USUARIO']?>&per=<?=$row['ID_PERFIL']?>&
-											 log=<?=$row['LOGIN_USUARIO']?>&nom=<?=$row['NOMBRE_USUARIO']?>&ape=<?=$row['APELLIDO_USUARIO']?>
-											 &ema=<?=$row['CORREO_USUARIO']?>&nac=<?=$row['FECHANACIMIENTO_USUARIO']?>"
-											  class="btn btn-info"><span class="glyphicon glyphicon-refresh"></span></a>
+											<a href="<?=ROOT_ADMIN?>vistas/modificarDetalle.php?id=<?=$row['ID_OC']?>&des=<?=$row['ID_PRODUCTO']?>&
+											 can=<?=$row['CANTIDAD']?>&tot=<?=$row['SUB_TOTAL']?>" class="btn btn-info"><span class="glyphicon glyphicon-refresh"></span></a>
 
 										</div>
 									</div>
@@ -147,7 +120,11 @@ $listaUsers = $modeloUsers->read();
 ?>
 		  			        </tbody>
 		  			    </table>
-
+								<div class="form-group">
+									<div class="col-lg-10 col-lg-offset-2 text-right">
+										<a href="<?=ROOT_ADMIN?>vistas/ListarOrdenes.php" class="btn btn-sm btn-primary">Volver  <span class="glyphicon glyphicon-send"></span></a>
+									</div>
+								</div>
 					</div>
 				</div>
 			</div>
