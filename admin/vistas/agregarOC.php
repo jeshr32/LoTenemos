@@ -2,19 +2,28 @@
 /*Llamadas de archivos necesarios
 por medio de require*/
 
-$titulo = "Detalle de Compra";
+$titulo = "Agregar OC";
 
 require __DIR__ . '/../../config/auth.php';
 require __DIR__ . '/../../config/config.php';
 require __DIR__ . '/../templates/header.php';
 require __DIR__ . '/../templates/menu.php';
 require __DIR__ . '/../templates/sidebar.php';
+require __DIR__ . '/../../clases/Productos.php';
+
 require __DIR__ . '/../../clases/Detalle_oc.php';
 
-$idoc = (isset($_GET['id']) && $_GET['id'] != "") ? $_GET['id'] : null;
+$prod = new Productos();
+$listaprod = $prod->read();
 
 $modeloDetalle = new Detalle();
+$idoc = (isset($_GET['id']) && $_GET['id'] != "") ? $_GET['id'] : null;
 $listaDetalle = $modeloDetalle->read($idoc);
+
+
+
+
+
 
 /*
 |--------------------------------------------------------------------------
@@ -26,39 +35,97 @@ $listaDetalle = $modeloDetalle->read($idoc);
 |
  */
 ?>
-<div class="content-wrapper">
+
+ <div class="content-wrapper">
 	<!-- Header de la pagina -->
 	<section class="content-header">
 		<h1>Ordenes de Compra</h1>
 		<ol class="breadcrumb">
-		<li><a href="<?=ROOT_URL?>index.php"><i class="fa fa-dashboard"></i> Dashboard</a></li>
-		<li class="active"><i class="fa fa-shopping-cart"></i> Detalle de la Orden</li>
+			<li><a href="<?=ROOT_ADMIN?>index.php"><i class="fa fa-dashboard"></i> Dashboard</a></li>
+			<li class="active"><i class="fa fa-shopping-cart"></i> Orden de Compra</li>
 		</ol>
 	</section>
-	<!-- Resultado positivo modificar-->
-	<?php if (array_key_exists('success_update', $_SESSION)) {
+	<!-- Contenido -->
+	<section class="content">
+		<!-- Otros Contenidos -->
+		<div class="row">
+
+		  	<!-- resultado postivo-->
+		  	<div id="ok"></div>
+		  	<?php if (array_key_exists('prod', $_SESSION)) {
 	?>
-            <div class="alert alert-info" role="alert">
-                <strong>Hey!</strong>
-                <br>
-                Se modifico correctamente el Producto !
-                <?php unset($_SESSION['success_update']);
-	?>
-            </div>
-    <?php }
+		  		<div class="col-md-12">
+			        <div class="alert alert-info" role="alert">
+			            <strong>Hey!</strong>
+			            <br>
+			            Se agrego correctamente el producto <?=$_SESSION['prod']?>!
+			            <?php unset($_SESSION['prod']);?>
+			        </div>
+			    </div>
+		    <?php }
+?>
+			<!-- resultado negativo segun corresponda -->
+			<?php if (array_key_exists('error_tmp', $_SESSION)) {?>
+			    <div class="col-md-12">
+			        <div class="alert alert-danger" role="alert">
+			            <strong><span class="glyphicon glyphicon-exclamation-sign"></span>  D'oh!</strong>
+			            <br>
+			            <?=$_SESSION['error_tmp']?>
+			            <?php unset($_SESSION['error_tmp']);?>
+			        </div>
+		       	</div>
+		    <?php }
 ?>
 
-    <!-- resultado negativo segun corresponda -->
-	<?php if (array_key_exists('error_tmp', $_SESSION)) {?>
-                <div class="alert alert-danger" role="alert">
-                    <strong><span class="glyphicon glyphicon-exclamation-sign"></span>  D'oh!</strong>
-                    <br>
-                    <?=$_SESSION['error_tmp']?>
-                    <?php unset($_SESSION['error_tmp']);?>
-                </div>
-    <?php }
-?>
-	<!-- Contenido -->
+			<div class="col-md-offset-2 col-md-8">
+				<div class="box box-solid">
+					<div class="box-header with-border">
+						<h3 class="box-title">Nueva Orden</h3>
+						<div class="box-tools pull-right">
+							<button class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="Minimizar"><i class="fa fa-minus"></i></button>
+						</div>
+					</div>
+					<div class="box-body">
+
+						<form class="form-horizontal" method="post" action="<?=ROOT_ADMIN?>controladores/insert-Producto.php" enctype="multipart/form-data">
+							<fieldset>
+								<div class="form-group">
+								<label for="producto" class="col-lg-2 control-label">Producto </label>
+									<div class="col-lg-10">
+										<select class="form-control" id="producto" name="producto">
+										<?php foreach ($listaprod as $row) {?>
+											<option value="<?=$row['ID_PRODUCTO']?>"><?=$row['DESCRIPCION']?> </option>
+											<input type="hidden" name="precio" value="<?=$row['PRECIO']?>">
+										<?php }?>
+										</select>
+										<br>
+									</div>
+								</div>
+								<div class="form-group">
+									<label for="cantidad" class="col-lg-2 control-label">Cantidad </label>
+									<div class="col-lg-10">
+										<input class="form-control" id="cantidad" placeholder="Cantidad" type="number" name="cantidad" required="true" min="1" >
+									</div>
+								</div>
+													
+
+
+								<div class="form-group">
+									<div class="col-lg-10 col-lg-offset-2 text-right">
+										<button id="btnrg" type="submit" class="btn btn-success">Agregar  <span class="glyphicon glyphicon-send"></span></button>
+									</div>
+								</div>
+
+							</fieldset>
+						</form>
+
+					</div>
+
+				</div>
+			</div>
+		</div>
+	</section>
+		<!-- Contenido -->
 	<section class="content">
 
 		<!-- Otros Contenidos -->
@@ -119,12 +186,7 @@ $listaDetalle = $modeloDetalle->read($idoc);
 		  			        <?php }
 ?>
 		  			        </tbody>
-		  			    </table>
-								<div class="form-group">
-									<div class="col-lg-10 col-lg-offset-2 text-right">
-										<a href="<?=ROOT_ADMIN?>vistas/ListarOrdenes.php" class="btn btn-sm btn-primary">Volver  <span class="glyphicon glyphicon-send"></span></a>
-									</div>
-								</div>
+		  			    </table>								
 					</div>
 				</div>
 			</div>
@@ -132,7 +194,10 @@ $listaDetalle = $modeloDetalle->read($idoc);
 	</section>
 </div>
 
+
 <?php
+
+
 /*
 |--------------------------------------------------------------------------
 | Footer
@@ -142,4 +207,5 @@ $listaDetalle = $modeloDetalle->read($idoc);
 |
  */
 require __DIR__ . '/../templates/footer.php';
+
 ?>

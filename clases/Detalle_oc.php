@@ -121,6 +121,24 @@ class Detalle {
 		}
 		return true;
 	}
+	public function deleteByUser($idorden) {
+		/*Definición del query que permitira eliminar un registro*/
+		$sqldel = "delete from detalle_oc where ID_OC=:idc ";
+
+		/*Preparación SQL*/
+		$querydel = $this->db->conexion->prepare($sqldel);
+
+		$querydel->bindParam(':idc', $idorden);
+		$querydel->bindParam(':idp', $idproduc);
+
+		try {
+			$querydel->execute();
+		} catch (PDOException $Exception) {
+			echo "Clase Detalle:ERROR:Ejecución Query " . $Exception->getMessage() . '/' . $Exception->getCode();
+			return false;
+		}
+		return true;
+	}
 
 }
 ?>

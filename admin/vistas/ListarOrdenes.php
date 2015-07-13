@@ -70,7 +70,7 @@ $listaOrden = $modeloOrden->read();
 			    			<button class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="Minimizar"><i class="fa fa-minus"></i></button>
 			  			</div>
 					</div>
-					<div class="box-body treeview-menu menu-open">
+					<div class="box-body">
 			  			<table id="dataTablesTable" class="table table-striped table-bordered" width="100%">
 		  			        <thead>
 		  			            <tr>
@@ -105,7 +105,13 @@ $listaOrden = $modeloOrden->read();
 
 									<div class="form-group">
 										<div class="col-md-2 col-sm-4 col-xs-8">
-											<a href="" class="btn btn-sm btn-info"><span class="glyphicon glyphicon-refresh"></span></a>
+											<a href="<?=ROOT_ADMIN?>controladores/delete-orden.php?id=<?=$row['ID_OC']?>" class="btn btn-sm btn-warning"><span class="glyphicon glyphicon-trash"></span></a>
+
+										</div>
+									</div>
+									<div class="form-group">
+										<div class="col-md-2 col-sm-4 col-xs-8">
+											<a href="<?=ROOT_ADMIN?>controladores/delete-orden.php?id=<?=$row['ID_OC']?>" class="btn btn-sm btn-primary"><span class="glyphicon glyphicon-refresh"></span></a>
 
 										</div>
 									</div>

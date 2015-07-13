@@ -105,6 +105,16 @@ class Orden implements Crud {
 		return true;
 	}
 	public function delete($id) {
+
+		/*Eliminamos los detalles de las ordenes*/
+			$sqldeta= "delete from detalle_oc where ID_OC=:id";
+			/*Preparamos la consulta*/
+			$sqldeta = $this->db->conexion->prepare($sqldeta);
+			/*Asignacion del mismo id*/
+			$sqldeta->bindParam(':id', $id);
+			/*execute*/
+			$sqldeta->execute();
+
 		/*Definición del query que permitira eliminar un registro*/
 		$sqldel = "delete from orden_compras where ID_OC=:id";
 
@@ -123,6 +133,17 @@ class Orden implements Crud {
 	}
 	public function existe($nombre) {
 		return null;
+	}
+	public function consultaOrden(){
+		/*Definición del query que permitira traer la fecha donde mas ordenes hay*/
+		$SQLCON = "sELECT FECHA_EMISION AS TIPO,COUNT(FECHA_EMISION) AS CANTIDAD FROM orden_compras GROUP BY TIPO ORDER BY CANTIDAD DESC";
+
+		/*Preparación SQL*/
+		$SQLCON = $this->db->conexion->prepare($SQLCON);
+
+		$SQLCON->execute();
+
+		return $SQLCON;
 	}
 
 }

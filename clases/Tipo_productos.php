@@ -1,4 +1,4 @@
-2<?php
+<?php
 /*Llamadas de archivos necesarios
 por medio de require*/
 require __DIR__ . '/../libs/db/db.php';
@@ -125,6 +125,18 @@ class Tipo implements Crud {
 		} else {
 			return false;
 		}
+	}
+	public function consultaTipo()
+	{
+		/*Definición del query que permitira traer el tipo de producto mas vendido*/
+		$SQLCON = "select t.DESCRIPCION_TIPO AS TIPO, COUNT(D.ID_PRODUCTO) AS CANTIDAD FROM tipo_producto t INNER JOIN productos p ON T.ID_TIPO_PRODUCTO=P.ID_TIPO_PRODUCTO INNER JOIN detalle_oc d on P.ID_PRODUCTO=D.ID_PRODUCTO GROUP BY TIPO ORDER BY CANTIDAD DESC";
+
+		/*Preparación SQL*/
+		$SQLCON = $this->db->conexion->prepare($SQLCON);
+
+		$SQLCON->execute();
+
+		return $SQLCON;
 	}
 
 }

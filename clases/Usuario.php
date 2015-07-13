@@ -156,7 +156,37 @@ class Usuario implements Crud {
 	}
 
 	public function delete($id) {
+		/*Seleccionamos las ordenes del usuario para eliminarlas*/
+		$sqlorden= "select * from orden_compras where ID_USUARIO=:id";
+		/*Preparamos la consulta*/
+		$sqlorden = $this->db->conexion->prepare($sqlorden);
+		/*Asignacion del mismo id*/
+		$sqlorden->bindParam(':id', $id);
+		/*execute*/
+		$sqlorden->execute();
 
+		foreach ($sqlorden as $row ) {
+			$idoc=$row['ID_OC'];
+			/*Eliminamos los detalles de las ordenes*/
+			$sqldeta= "delete from detalle_oc where ID_OC=:idc";
+			/*Preparamos la consulta*/
+			$sqldeta = $this->db->conexion->prepare($sqldeta);
+			/*Asignacion del mismo id*/
+			$sqldeta->bindParam(':idc', $idoc);
+			/*execute*/
+			$sqldeta->execute();
+		}
+
+		/*Eliminamos las ordenes*/
+			$sqlelim= "delete from orden_compras where ID_USUARIO=:id";
+			/*Preparamos la consulta*/
+			$sqlelim = $this->db->conexion->prepare($sqlelim);
+			/*Asignacion del mismo id*/
+			$sqlelim->bindParam(':id', $id);
+			/*execute*/
+			$sqlelim->execute();
+
+			
 		/*Definición del query que permitira eliminar un registro*/
 		$sqldel = "delete from usuario where ID_USUARIO=:id";
 

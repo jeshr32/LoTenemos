@@ -8,7 +8,6 @@
 | cada pagina, mas declaraion de variables para el header, menu, sidebar.
 |
  */
-
 /*
 |--------------------------------------------------------------------------
 | Contenido del Sitio
@@ -52,7 +51,9 @@
 			</li>
 			<li class="header">SITIO</li>
 
+			<?php if($_SESSION['usuario']['perfil']==3){?>
 			<li class="treeview">
+
 				<a href="#">
 					<i class="fa fa-coffee"></i> <span>Mantenedores</span>
 					<i class="fa fa-angle-left pull-right"></i>
@@ -94,26 +95,25 @@
 						<li class="">
 						<a href="#"><i class="fa fa-circle-o text-black"></i> Detalle OC <i class="fa fa-angle-left pull-right"></i></a>
 						<ul class="treeview-menu menu-open" >
-							<li><a href="#"><i class="fa fa-plus-circle"></i> Agregar Nuevo</a></li>
 							<li><a href="#"><i class="fa fa-list-ul"></i> Ver Todos</a></li>
 						</ul>
 					</li>
 
 				</ul>
 			</li>
-
+			<?php } ?>
 			<li>
-	  			<a href="<?=ROOT_ADMIN?>contactos.php">
+	  			<a href="<?=ROOT_ADMIN?>vistas/consultas.php">
 	    			<i class="fa fa-binoculars"></i> <span>Consultas</span>
 	  			</a>
 			</li>
-
+			<?php if($_SESSION['usuario']['perfil']==3 || $_SESSION['usuario']['perfil']==1 ){?>
 			<li>
-	  			<a href="<?=ROOT_ADMIN?>contactos.php">
+	  			<a href="<?=ROOT_ADMIN?>vistas/agregarOC.php">
 	    			<i class="fa fa-credit-card"></i> <span>Agregar Orden de Compra</span>
 	  			</a>
 			</li>
-
+			<?php } ?>
 			<!-- Accessos Rapidos -->
 			<li class="header">ATAJOS</li>
 			<li><a href="<?=ROOT_ADMIN?>perfil.php"><i class="fa fa-user"></i> <span>Mi Perfil</span></a></li>

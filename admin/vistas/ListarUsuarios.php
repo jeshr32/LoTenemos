@@ -47,13 +47,13 @@ $listaUsers = $modeloUsers->read();
     <?php }
 ?>
 	<!-- Resultado positivo eliminar-->
-	<?php if (array_key_exists('success_contact', $_SESSION)) {
+	<?php if (array_key_exists('delusr', $_SESSION)) {
 	?>
             <div class="alert alert-info" role="alert">
                 <strong>Hey!</strong>
                 <br>
-                Se elimino correctamente el Producto <?=$_SESSION['producto']?>!
-                <?php unset($_SESSION['success_contact']);
+                Se elimino correctamente el Usuario <?=$_SESSION['delusr']?>!
+                <?php unset($_SESSION['delusr']);
 	unset($_SESSION['producto']);?>
             </div>
     <?php }
@@ -124,7 +124,7 @@ $listaUsers = $modeloUsers->read();
 								<td>
 									<div class="form-group">
 										<div class="col-md-2 col-sm-4 col-xs-8" >
-											<a href=""
+											<a href="<?=ROOT_ADMIN?>controladores/delete-user.php?id=<?=$row['ID_USUARIO']?>&per=<?=$row['LOGIN_USUARIO']?>"
 													class="btn btn-danger"
 											  		onClick="return confirmation()">
 											 		<span class="glyphicon glyphicon-trash"></span>
