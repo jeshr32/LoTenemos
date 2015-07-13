@@ -139,6 +139,6 @@ class Detalle {
 		}
 		return true;
 	}
-
+	
 }
 ?>

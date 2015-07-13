@@ -109,14 +109,14 @@
 			</li>
 			<?php if($_SESSION['usuario']['perfil']==3 || $_SESSION['usuario']['perfil']==1 ){?>
 			<li>
-	  			<a href="<?=ROOT_ADMIN?>vistas/agregarOC.php">
+	  			<a href="<?=ROOT_ADMIN?>controladores/creaOrden.php">
 	    			<i class="fa fa-credit-card"></i> <span>Agregar Orden de Compra</span>
 	  			</a>
 			</li>
 			<?php } ?>
 			<!-- Accessos Rapidos -->
 			<li class="header">ATAJOS</li>
-			<li><a href="<?=ROOT_ADMIN?>perfil.php"><i class="fa fa-user"></i> <span>Mi Perfil</span></a></li>
+			<li><a href="<?=ROOT_ADMIN?>vistas/MyOrden.php"><i class="fa fa-user"></i> <span>Mis Ordenes</span></a></li>
 			<li><a href="<?=ROOT_ADMIN?>logout.php"><i class="fa fa-sign-out"></i> <span>Cerrar Sesión</span></a></li>
 			</ul>
 	</section>

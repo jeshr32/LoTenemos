@@ -36,7 +36,7 @@
               				<!-- Menu Footer-->
               				<li class="user-footer">
                 				<div class="pull-left">
-                  					<a href="<?=ROOT_ADMIN?>perfil.php" class="btn btn-default btn-flat">Perfil</a>
+                  					<a href="<?=ROOT_ADMIN?>vistas/MyOrden.php" class="btn btn-default btn-flat">Mis Ordenes</a>
                 				</div>
                 				<div class="pull-right">
                   					<a href="<?=ROOT_ADMIN?>logout.php" class="btn btn-default btn-flat">Cerrar Sesión</a>

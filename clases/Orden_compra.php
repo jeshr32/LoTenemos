@@ -145,6 +145,17 @@ class Orden implements Crud {
 
 		return $SQLCON;
 	}
+	public function maximoID(){
+		/*Definición del query que permitira traer en que id va la tabla*/
+		$SQLmax = "sELECT max(ID_OC) FROM orden_compras";
+
+		/*Preparación SQL*/
+		$SQLmax = $this->db->conexion->prepare($SQLmax);
+
+		$SQLmax->execute();
+
+		return $SQLmax;
+	}
 
 }
 

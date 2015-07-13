@@ -140,6 +140,21 @@ class Productos implements Crud {
 			return false;
 		}
 	}
+	
+	public function precio($id){
+		/*Definición del query que permitira traer precio de un producto en especifico*/
+		$sqlprec = "sELECT PRECIO FROM productos where ID_PRODUCTO=:idc";
+
+		/*Preparación SQL*/
+		$sqlprec = $this->db->conexion->prepare($sqlprec);
+
+		$sqlprec->bindParam(':idc', $id);
+
+		$sqlprec->execute();
+
+		return $sqlprec;
+	}
+
 
 }
 ?>

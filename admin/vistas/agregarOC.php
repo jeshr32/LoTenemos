@@ -17,7 +17,7 @@ $prod = new Productos();
 $listaprod = $prod->read();
 
 $modeloDetalle = new Detalle();
-$idoc = (isset($_GET['id']) && $_GET['id'] != "") ? $_GET['id'] : null;
+$idoc = $_SESSION['idorden'];
 $listaDetalle = $modeloDetalle->read($idoc);
 
 
@@ -42,7 +42,7 @@ $listaDetalle = $modeloDetalle->read($idoc);
 		<h1>Ordenes de Compra</h1>
 		<ol class="breadcrumb">
 			<li><a href="<?=ROOT_ADMIN?>index.php"><i class="fa fa-dashboard"></i> Dashboard</a></li>
-			<li class="active"><i class="fa fa-shopping-cart"></i> Orden de Compra</li>
+			<li class="active"><i class="fa fa-shopping-cart"></i> Orden de Compra N <?=$idoc?></li>
 		</ol>
 	</section>
 	<!-- Contenido -->
@@ -80,14 +80,14 @@ $listaDetalle = $modeloDetalle->read($idoc);
 			<div class="col-md-offset-2 col-md-8">
 				<div class="box box-solid">
 					<div class="box-header with-border">
-						<h3 class="box-title">Nueva Orden</h3>
+						<h3 class="box-title">Orden de Compra N <?=$idoc?></h3>
 						<div class="box-tools pull-right">
 							<button class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="Minimizar"><i class="fa fa-minus"></i></button>
 						</div>
 					</div>
 					<div class="box-body">
 
-						<form class="form-horizontal" method="post" action="<?=ROOT_ADMIN?>controladores/insert-Producto.php" enctype="multipart/form-data">
+						<form class="form-horizontal" method="post" action="<?=ROOT_ADMIN?>controladores/insert-detalle.php" enctype="multipart/form-data">
 							<fieldset>
 								<div class="form-group">
 								<label for="producto" class="col-lg-2 control-label">Producto </label>
@@ -95,7 +95,6 @@ $listaDetalle = $modeloDetalle->read($idoc);
 										<select class="form-control" id="producto" name="producto">
 										<?php foreach ($listaprod as $row) {?>
 											<option value="<?=$row['ID_PRODUCTO']?>"><?=$row['DESCRIPCION']?> </option>
-											<input type="hidden" name="precio" value="<?=$row['PRECIO']?>">
 										<?php }?>
 										</select>
 										<br>
@@ -153,7 +152,7 @@ $listaDetalle = $modeloDetalle->read($idoc);
 		  			            	<th>Nombre de Producto</th>
 		  			                <th>Cantidad</th>
 		  			                <th>Sub total</th>
-		  			                <th>Acciones</th>
+		  			                <th>Total</th>
 		  			            </tr>
 		  			        </tfoot>
 		  			        <tbody>
@@ -186,11 +185,17 @@ $listaDetalle = $modeloDetalle->read($idoc);
 		  			        <?php }
 ?>
 		  			        </tbody>
-		  			    </table>								
+		  			    </table>
+		  			    <div class="form-group">
+									<div class="col-lg-10 col-lg-offset-2 text-right">
+										<a href="<?=ROOT_ADMIN?>controladores/agregar-Orden.php?id=<?=$row['ID_OC']?>" class="btn btn-primary"><span class="glyphicon glyphicon-ok"></span> Orden Terminada</a>
+									</div>
+						</div>								
 					</div>
 				</div>
 			</div>
 		</div>
+
 	</section>
 </div>
 
