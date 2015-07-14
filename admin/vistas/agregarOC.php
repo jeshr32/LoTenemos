@@ -17,9 +17,8 @@ $prod = new Productos();
 $listaprod = $prod->read();
 
 $modeloDetalle = new Detalle();
-$idoc = $_SESSION['idorden'];
+$idoc=(isset($_GET['id']) && $_GET['id'] != "") ? $_GET['id'] : $_SESSION['idorden'];
 $listaDetalle = $modeloDetalle->read($idoc);
-
 
 
 
@@ -52,14 +51,14 @@ $listaDetalle = $modeloDetalle->read($idoc);
 
 		  	<!-- resultado postivo-->
 		  	<div id="ok"></div>
-		  	<?php if (array_key_exists('prod', $_SESSION)) {
+		  	<?php if (array_key_exists('susses_Orden', $_SESSION)) {
 	?>
 		  		<div class="col-md-12">
 			        <div class="alert alert-info" role="alert">
 			            <strong>Hey!</strong>
 			            <br>
-			            Se agrego correctamente el producto <?=$_SESSION['prod']?>!
-			            <?php unset($_SESSION['prod']);?>
+			            Se guardo correctamente la Orden !
+			            <?php unset($_SESSION['susses_Orden']);?>
 			        </div>
 			    </div>
 		    <?php }
@@ -152,7 +151,9 @@ $listaDetalle = $modeloDetalle->read($idoc);
 		  			            	<th>Nombre de Producto</th>
 		  			                <th>Cantidad</th>
 		  			                <th>Sub total</th>
-		  			                <th>Total</th>
+		  			                <th>Total <?php if (array_key_exists('total', $_SESSION)) {?>
+			    				     <?=$_SESSION['total']?>
+			                         <?php }?></th>
 		  			            </tr>
 		  			        </tfoot>
 		  			        <tbody>
@@ -165,20 +166,14 @@ $listaDetalle = $modeloDetalle->read($idoc);
 								<td>
 									<div class="form-group">
 										<div class="col-md-2 col-sm-4 col-xs-8" >
-											<a href="<?=ROOT_ADMIN?>controladores/delete-detalle.php?id=<?=$idoc?>&des=<?=$row['ID_PRODUCTO']?>"
+											<a href="<?=ROOT_ADMIN?>controladores/delete-detalleOrden.php?id=<?=$idoc?>&des=<?=$row['ID_PRODUCTO']?>"
 													class="btn btn-danger"
 											  		onClick="return confirmation()">
 											 		<span class="glyphicon glyphicon-trash"></span>
 											</a>
 										</div>
 									</div>
-									<div class="form-group">
-										<div class="col-md-2 col-sm-4 col-xs-8">
-											<a href="<?=ROOT_ADMIN?>vistas/modificarDetalle.php?id=<?=$row['ID_OC']?>&des=<?=$row['ID_PRODUCTO']?>&
-											 can=<?=$row['CANTIDAD']?>&tot=<?=$row['SUB_TOTAL']?>" class="btn btn-info"><span class="glyphicon glyphicon-refresh"></span></a>
-
-										</div>
-									</div>
+									
 
 								</td>
 							</tr>

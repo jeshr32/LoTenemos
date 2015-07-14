@@ -16,13 +16,13 @@ require __DIR__ . '/../../clases/Orden_compra.php';
 	$estado = "enviado";
 	$usr = $_SESSION['usuario']['id'];
 
-	$orden= new Orden();
+	$orden= new Orden($total,$estado,$usr);
 
 		
 
-	if ($orden->update($idor)) {
+	if ($orden->update($idord)) {
 		$_SESSION['susses_Orden'] = true;
-
+		unset($_SESSION['total']);
 	} else {
 		$_SESSION['error_tmp'] = "Orden no ingresado";
 	}

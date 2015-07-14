@@ -156,6 +156,19 @@ class Orden implements Crud {
 
 		return $SQLmax;
 	}
+	public function myorden($id){
+		/*Definición del query que permitira traer las ordenes de un usuario en especifico*/
+		$SQLmy = "sELECT * FROM orden_compras o INNER JOIN usuario u ON o.ID_USUARIO=u.ID_USUARIO where o.ID_USUARIO=:id";
+
+		/*Preparación SQL*/
+		$SQLmy = $this->db->conexion->prepare($SQLmy);
+
+		$SQLmy->bindParam(':id', $id);
+
+		$SQLmy->execute();
+
+		return $SQLmy;
+	}
 
 }
 

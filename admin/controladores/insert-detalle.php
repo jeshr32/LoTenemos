@@ -28,6 +28,7 @@ if (!empty($_POST['producto']) && !empty($_POST['cantidad'] ) ) {
 
 	if ($det->insert()) {
 		$_SESSION['susses_det'] = true;
+		$_SESSION['total']= $_SESSION['total']+$subtot;
 
 	} else {
 		$_SESSION['error_tmp'] = "Detalle no ingresado";

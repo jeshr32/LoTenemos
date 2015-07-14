@@ -87,18 +87,11 @@
 						<li class="">
 						<a href="#"><i class="fa fa-circle-o text-green"></i> Ordenes de compra <i class="fa fa-angle-left pull-right"></i></a>
 						<ul class="treeview-menu menu-open" >
-							<li><a href="#"><i class="fa fa-plus-circle"></i> Agregar Nuevo</a></li>
 							<li><a href="<?=ROOT_ADMIN?>vistas/ListarOrdenes.php"><i class="fa fa-list-ul"></i> Ver Todos</a></li>
 						</ul>
 					</li>
 					</li>
-						<li class="">
-						<a href="#"><i class="fa fa-circle-o text-black"></i> Detalle OC <i class="fa fa-angle-left pull-right"></i></a>
-						<ul class="treeview-menu menu-open" >
-							<li><a href="#"><i class="fa fa-list-ul"></i> Ver Todos</a></li>
-						</ul>
-					</li>
-
+						
 				</ul>
 			</li>
 			<?php } ?>
@@ -116,7 +109,9 @@
 			<?php } ?>
 			<!-- Accessos Rapidos -->
 			<li class="header">ATAJOS</li>
+			<?php if($_SESSION['usuario']['perfil']==3 || $_SESSION['usuario']['perfil']==1 ){?>
 			<li><a href="<?=ROOT_ADMIN?>vistas/MyOrden.php"><i class="fa fa-user"></i> <span>Mis Ordenes</span></a></li>
+			<?php } ?>
 			<li><a href="<?=ROOT_ADMIN?>logout.php"><i class="fa fa-sign-out"></i> <span>Cerrar Sesión</span></a></li>
 			</ul>
 	</section>

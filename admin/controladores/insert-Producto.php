@@ -20,8 +20,7 @@ if (!empty($_POST['nombre']) && !empty($_POST['precio']) && !empty($_POST['unida
 	$Producto = new Productos($nombre, $precio, $unidad, $tipo);
 
 	if ($Producto->insert()) {
-		$_SESSION['total'] = $_SESSION['total']+$precio;
-
+		$_SESSION['prod'] = $nombre;
 
 	} else {
 		$_SESSION['error_tmp'] = "Producto no ingresado";

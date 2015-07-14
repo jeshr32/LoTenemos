@@ -35,9 +35,11 @@
               				</li>
               				<!-- Menu Footer-->
               				<li class="user-footer">
+                        <?php if($_SESSION['usuario']['perfil']==3 || $_SESSION['usuario']['perfil']==1 ){?>
                 				<div class="pull-left">
                   					<a href="<?=ROOT_ADMIN?>vistas/MyOrden.php" class="btn btn-default btn-flat">Mis Ordenes</a>
                 				</div>
+                        <?php } ?>
                 				<div class="pull-right">
                   					<a href="<?=ROOT_ADMIN?>logout.php" class="btn btn-default btn-flat">Cerrar Sesión</a>
                 				</div>

@@ -57,6 +57,18 @@ $listaOrden = $modeloOrden->read();
                 </div>
     <?php }
 ?>
+<!-- Resultado positivo eliminar-->
+	<?php if (array_key_exists('del_ord', $_SESSION)) {
+	?>
+            <div class="alert alert-info" role="alert">
+                <strong>Hey!</strong>
+                <br>
+                Se elimino correctamente la Orden !
+                <?php unset($_SESSION['del_ord']);
+	unset($_SESSION['producto']);?>
+            </div>
+    <?php }
+?>
 	<!-- Contenido -->
 	<section class="content">
 
@@ -111,7 +123,7 @@ $listaOrden = $modeloOrden->read();
 									</div>
 									<div class="form-group">
 										<div class="col-md-2 col-sm-4 col-xs-8">
-											<a href="<?=ROOT_ADMIN?>controladores/delete-orden.php?id=<?=$row['ID_OC']?>" class="btn btn-sm btn-primary"><span class="glyphicon glyphicon-refresh"></span></a>
+											<a href="<?=ROOT_ADMIN?>vistas/agregarOC.php?id=<?=$row['ID_OC']?>" class="btn btn-sm btn-primary"><span class="glyphicon glyphicon-refresh"></span></a>
 
 										</div>
 									</div>
